@@ -11,9 +11,7 @@
 html,body{width:100%;height:100%;background:#000;overflow:hidden;touch-action:manipulation;-webkit-text-size-adjust:100%}
 body{font-family:'Montserrat',Arial,sans-serif}
 
-/* ===============================
-   LOGO STAGE (الخلفية)
-   =============================== */
+/* LOGO STAGE */
 #logo-stage{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;z-index:10000;transition:z-index 0s 1.5s, background 1.5s ease;background:#000}
 .logo-container{width:300px;height:300px;position:relative;margin:auto;transition:transform 2.5s cubic-bezier(.25,.1,.25,1),opacity 2.5s ease;transform-origin:center 45%}
 .logo-container svg{width:100%;height:100%;overflow:visible;display:block}
@@ -29,16 +27,12 @@ body{font-family:'Montserrat',Arial,sans-serif}
 @keyframes drawHex{from{stroke-dasharray:1000;stroke-dashoffset:1000}to{stroke-dashoffset:0}}
 @keyframes growBar{from{transform:scaleY(0);transform-origin:bottom;opacity:0}to{transform:scaleY(1);transform-origin:bottom;opacity:1}}
 
-/* ===============================
-   PAGES WRAPPERS
-   =============================== */
+/* PAGES */
 .page-wrapper{position:fixed;top:0;left:0;width:100%;height:100%;z-index:10;opacity:0;pointer-events:none;transition:opacity .8s ease;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;scroll-behavior:smooth;background:transparent}
 .page-wrapper::-webkit-scrollbar{display:none}
 .page-wrapper.visible{opacity:1;pointer-events:all}
 
-/* ===============================
-   LANDING PAGE (English)
-   =============================== */
+/* LANDING PAGE */
 .landing-nav{position:sticky;top:0;height:56px;display:flex;justify-content:center;align-items:center;padding:0 20px;background:rgba(5,7,11,.8);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.05);z-index:200}
 .nav-center{display:flex;align-items:center;width:100%;max-width:1100px;justify-content:space-between}
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
@@ -100,9 +94,7 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .plan-btn.primary:hover{background:#00f0ff}
 .plan-btn.secondary{background:transparent;color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.08)}
 
-/* ===============================
-   AUTH PAGE (بدون إطار - No Borders)
-   =============================== */
+/* AUTH PAGE */
 #auth-page{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px}
 .auth-container{width:100%;max-width:320px;text-align:center;animation:slideUp .8s ease}
 @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
@@ -123,9 +115,7 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .auth-btn:active{transform:scale(0.98)}
 .auth-footer{margin-top:16px;font-size:10px;color:rgba(255,255,255,.4)}
 
-/* ===============================
-   MAIN APP
-   =============================== */
+/* MAIN APP */
 #main-app{display:flex;flex-direction:column}
 .app-header{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;background:rgba(5,7,11,.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.05);position:sticky;top:0;z-index:200}
 .header-left{display:flex;align-items:center;gap:10px}
@@ -160,16 +150,58 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .section-title-app{font-size:14px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
 .section-title-app::before{content:'';width:3px;height:16px;background:#00d2ff;border-radius:3px}
 
-.tool-card{cursor:pointer;transition:all .3s}
-.tool-card:active{border-color:rgba(0,210,255,.3);transform:scale(0.98)}
+/* TOOL CAROUSEL & PAGES */
+.tool-full-card{padding:18px;margin-bottom:16px;overflow:hidden}
 .tool-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .tool-icon{width:40px;height:40px;border-radius:8px;background:rgba(0,210,255,.06);display:flex;align-items:center;justify-content:center;color:#00d2ff;border:1px solid rgba(0,210,255,.1)}
 .tool-icon svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .tool-info h3{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
 .tool-info p{font-size:11px;color:rgba(255,255,255,.5)}
-.tool-stats{display:flex;gap:12px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.04)}
-.tool-stat{display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.5);font-weight:600}
-.tool-stat svg{width:14px;height:14px;color:#00d2ff;fill:none;stroke:currentColor;stroke-width:1.8}
+
+.tool-carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;width:100%;gap:0}
+.tool-carousel::-webkit-scrollbar{display:none}
+.tool-page{min-width:100%;scroll-snap-align:start;padding-right:18px;box-sizing:border-box}
+
+.tool-details{margin-top:6px;padding-top:14px;border-top:1px solid rgba(255,255,255,.04)}
+.tool-details h4{font-size:12px;font-weight:700;color:#fff;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.tool-details h4::before{content:'';width:2px;height:12px;background:#00d2ff;border-radius:2px}
+.tool-details p{font-size:11px;color:rgba(255,255,255,.5);margin-bottom:8px;line-height:1.5}
+
+.step-list{list-style:none;margin-bottom:12px}
+.step-list li{font-size:11px;color:rgba(255,255,255,.6);margin-bottom:6px;display:flex;gap:8px;align-items:center}
+.step-list li span{background:rgba(0,210,255,.1);color:#00d2ff;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0}
+
+.feature-list-sm{list-style:none;margin-top:8px}
+.feature-list-sm li{font-size:11px;color:rgba(255,255,255,.6);display:flex;align-items:flex-start;gap:6px;margin-bottom:4px}
+.feature-list-sm li svg{width:12px;height:12px;color:#00d2ff;flex-shrink:0;margin-top:2px}
+
+.img-placeholder{width:100%;height:120px;background:rgba(0,0,0,.3);border:1px dashed rgba(255,255,255,.1);border-radius:8px;margin:12px 0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:10px}
+
+/* LIKE, DOWNLOAD & DOTS STYLES */
+.tool-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:10px;flex-wrap:wrap}
+.tool-stats{display:flex;gap:12px;align-items:center}
+.stat-item-btn{display:flex;align-items:center;gap:5px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.5);font-size:11px;font-weight:600;cursor:pointer;padding:6px 10px;border-radius:6px;transition:all .3s}
+.stat-item-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8}
+.stat-item-btn:hover{background:rgba(255,255,255,.05)}
+.like-btn.active{color:#ff4d6d;border-color:rgba(255,77,109,.3);background:rgba(255,77,109,.1)}
+.like-btn.active svg{fill:#ff4d6d;stroke:#ff4d6d}
+
+.dots-container{display:flex;justify-content:center;gap:6px;margin-top:14px;width:100%}
+.dot{width:6px;height:6px;background:rgba(255,255,255,.2);border-radius:50%;transition:all .3s}
+.dot.active{background:#00d2ff;width:18px;border-radius:3px}
+
+.comments-section{margin-top:14px;background:rgba(0,0,0,.2);border-radius:8px;padding:10px}
+.comments-section h5{font-size:11px;color:rgba(255,255,255,.6);margin-bottom:8px;font-weight:600}
+.comment-item{padding:6px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.comment-item:last-child{border-bottom:none}
+.comment-author{font-size:11px;font-weight:700;color:#00d2ff}
+.comment-text{font-size:10px;color:rgba(255,255,255,.6);margin-top:2px}
+
+.pricing-mini-card{background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:14px;margin-bottom:10px}
+.pricing-mini-card.featured{border-color:rgba(0,210,255,.3);background:rgba(0,210,255,.05);box-shadow:0 4px 20px rgba(0,210,255,.1)}
+.pricing-mini-card .plan-name{margin-bottom:4px}
+.pricing-mini-card .plan-price{font-size:22px;margin:4px 0}
+.pricing-mini-card .plan-desc{font-size:10px;margin-bottom:10px;min-height:auto}
 
 .tabs{display:flex;gap:6px;margin-bottom:14px;background:rgba(11,15,24,.6);backdrop-filter:blur(8px);padding:4px;border-radius:8px;border:1px solid rgba(255,255,255,.04)}
 .tab{flex:1;padding:8px;border-radius:6px;border:none;background:transparent;color:rgba(255,255,255,.4);font-family:'Montserrat';font-size:12px;font-weight:600;cursor:pointer;transition:all .3s}
@@ -191,18 +223,6 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .btn-secondary{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.08)}
 .btn-secondary:active{background:rgba(255,255,255,.1)}
 .btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8}
-
-.history-item{display:flex;justify-content:space-between;align-items:center}
-.history-info h4{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px}
-.history-info p{font-size:11px;color:rgba(255,255,255,.5)}
-
-.list-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
-.list-info h3{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px}
-.list-meta{display:flex;gap:12px;margin-bottom:12px}
-.list-meta-item{display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.5);font-weight:600}
-.list-meta-item svg{width:14px;height:14px;color:#00d2ff;fill:none;stroke:currentColor;stroke-width:1.8}
-.list-actions{display:flex;gap:8px}
-.list-actions .btn{flex:1}
 
 .profile-header{text-align:center;margin-bottom:16px}
 .profile-avatar-xl{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#00d2ff,#0099cc);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:#000;border:3px solid rgba(0,210,255,.4)}
@@ -259,10 +279,14 @@ body{font-family:'Montserrat',Arial,sans-serif}
     <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
     <symbol id="icon-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
     <symbol id="icon-trend-up" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
+    <symbol id="icon-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+    <symbol id="icon-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+    <symbol id="icon-bot" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></symbol>
+    <symbol id="icon-heart" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
   </defs>
 </svg>
 
-<!-- LOGO STAGE (الخلفية) -->
+<!-- LOGO STAGE -->
 <div id="logo-stage">
   <div class="logo-container" id="logoContainer">
     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
@@ -287,7 +311,7 @@ body{font-family:'Montserrat',Arial,sans-serif}
   </div>
 </div>
 
-<!-- LANDING PAGE (English) -->
+<!-- LANDING PAGE -->
 <div id="landing-page" class="page-wrapper">
   <nav class="landing-nav">
     <div class="nav-center">
@@ -394,7 +418,7 @@ body{font-family:'Montserrat',Arial,sans-serif}
   </section>
 </div>
 
-<!-- AUTH PAGE (بدون إطار - No Borders) -->
+<!-- AUTH PAGE -->
 <div id="auth-page" class="page-wrapper">
   <div class="auth-container">
     <div class="auth-logo">
@@ -403,8 +427,8 @@ body{font-family:'Montserrat',Arial,sans-serif}
         <path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="none"/>
         <g clip-path="url(#wlClip)"><rect x="65" y="110" width="18" height="50" rx="2" fill="none" stroke="url(#wlGrad)" stroke-width="4"/><rect x="91" y="85" width="18" height="75" rx="2" fill="none" stroke="url(#wlGrad)" stroke-width="4"/><rect x="117" y="60" width="18" height="100" rx="2" fill="none" stroke="url(#wlGrad)" stroke-width="4"/></g>
         <path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="none" stroke="url(#wlGrad)" stroke-width="6"/>
-        <path d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="url(#wlGrad)" stroke-width="6" stroke-linejoin="round"/>
-        <g style="opacity:1;transform:translate(165px,45px) rotate(-35deg)"><path d="M-15 -9 L8 0 L-15 9 Z" fill="none" stroke="#00d2ff" stroke-width="2" stroke-linejoin="round"/></g>
+        <path d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="url(#wlGrad)" stroke-width="6" stroke-linejoin:round"/>
+        <g style="opacity:1;transform:translate(165px,45px) rotate(-35deg)"><path d="M-15 -9 L8 0 L-15 9 Z" fill="none" stroke="#00d2ff" stroke-width="2" stroke-linejoin:round"/></g>
       </svg>
     </div>
     <h1 class="auth-title">QXTerminal</h1>
@@ -450,30 +474,216 @@ body{font-family:'Montserrat',Arial,sans-serif}
   <div class="main-content">
     <div id="section-home" class="section active">
       <div class="card welcome-card">
-        <h2>Build Your Trading <span>Success</span></h2>
-        <p>Professional time-based signal generation tools with real market integration.</p>
+        <h2>Our Trading <span>Tools & Products</span></h2>
+        <p>Explore our suite of professional tools. Swipe to see details, usage, and pricing.</p>
       </div>
       <div class="stats-grid">
         <div class="card stat-box"><div class="stat-value-app" id="totalPoints">10</div><div class="stat-label-app">Your Points</div></div>
         <div class="card stat-box"><div class="stat-value-app" id="totalReferrals">0</div><div class="stat-label-app">Referrals</div></div>
       </div>
-      <div class="section-header-app"><div class="section-title-app">Available Tools</div></div>
-      <div class="card tool-card" onclick="switchSection('signals')">
+      
+      <div class="section-header-app"><div class="section-title-app">Tools Marketplace</div></div>
+      
+      <!-- TOOL 1: TIME-BASED LIST GENERATOR -->
+      <div class="card tool-full-card">
         <div class="tool-header">
           <div class="tool-icon"><svg><use href="#icon-lightning"/></svg></div>
-          <div class="tool-info"><h3>Signal Generator</h3><p>Generate 5-40 time signals</p></div>
+          <div class="tool-info">
+            <h3>Time-Based List Generator</h3>
+            <p>Generate precise real market signals</p>
+          </div>
         </div>
-        <div class="tool-stats">
-          <div class="tool-stat"><svg><use href="#icon-check"/></svg><span>Cost: 5 points</span></div>
+        
+        <div class="tool-carousel">
+          <!-- Page 1: Overview -->
+          <div class="tool-page">
+            <div class="tool-details">
+              <h4>Tool Overview</h4>
+              <p>We focus on actual entry times rather than just prices. Get instant, ready-to-execute time-based lists for the real market.</p>
+              <div class="img-placeholder">Tool Screenshots Will Be Added Here</div>
+              <div class="tool-footer">
+                <div class="tool-stats">
+                  <button class="stat-item-btn like-btn" onclick="toggleLike(this)">
+                    <svg><use href="#icon-heart"/></svg>
+                    <span class="like-count">1542</span>
+                  </button>
+                  <div class="stat-item-btn" style="cursor:default">
+                    <svg><use href="#icon-download"/></svg>
+                    <span>2540</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Page 2: Usage -->
+          <div class="tool-page">
+            <div class="tool-details">
+              <h4>How to Download & Use</h4>
+              <ul class="step-list">
+                <li><span>1</span> Select purchase option or use points.</li>
+                <li><span>2</span> Connect securely to the local terminal.</li>
+                <li><span>3</span> Engine scans real market for accurate times.</li>
+                <li><span>4</span> Download or copy your list instantly.</li>
+              </ul>
+              <div class="comments-section">
+                <h5>User Reviews & Comments</h5>
+                <div class="comment-item">
+                  <div class="comment-author">@TraderX</div>
+                  <div class="comment-text">Best time-based generator. Works perfectly on real market!</div>
+                </div>
+                <div class="comment-item">
+                  <div class="comment-author">@ProDev</div>
+                  <div class="comment-text">Very accurate times, highly recommended.</div>
+                </div>
+              </div>
+              <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="switchSection('signals', document.getElementById('nav-signals'))">
+                <svg><use href="#icon-tool"/></svg> Open Tool
+              </button>
+            </div>
+          </div>
+
+          <!-- Page 3: Pricing -->
+          <div class="tool-page">
+            <div class="tool-details">
+              <h4>Pricing & Plans</h4>
+              <div class="pricing-mini-card">
+                <div class="plan-name">Source Code</div>
+                <div class="plan-price">$105</div>
+                <p class="plan-desc">Full Source Code Access</p>
+                <button class="btn btn-secondary" style="width:100%">Buy Source</button>
+              </div>
+              <div class="pricing-mini-card featured">
+                <div class="plan-name">Monthly Subscription</div>
+                <div class="plan-price">$5</div>
+                <p class="plan-desc">Unlimited Access No Limits</p>
+                <button class="btn btn-primary" style="width:100%">Subscribe Monthly</button>
+              </div>
+              <div class="pricing-mini-card">
+                <div class="plan-name">Weekly Subscription</div>
+                <div class="plan-price">$7</div>
+                <p class="plan-desc">Unlimited Access No Limits</p>
+                <button class="btn btn-secondary" style="width:100%">Subscribe Weekly</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dots-container">
+          <div class="dot active"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
         </div>
       </div>
-      <div class="card tool-card" onclick="switchSection('ready')">
+
+      <!-- TOOL 2: QUOTEX TO MT4 SOURCE CODE -->
+      <div class="card tool-full-card">
         <div class="tool-header">
-          <div class="tool-icon" style="background:rgba(240,165,0,.06);color:#f0a500"><svg><use href="#icon-tool"/></svg></div>
-          <div class="tool-info"><h3>Ready Lists</h3><p>Daily curated time signals</p></div>
+          <div class="tool-icon" style="background:rgba(240,165,0,.06);color:#f0a500;border-color:rgba(240,165,0,.1)"><svg><use href="#icon-code"/></svg></div>
+          <div class="tool-info">
+            <h3>Quotex to MT4 Sync (Source Code)</h3>
+            <p>Full MQL4 & Python Source Code</p>
+          </div>
         </div>
-        <div class="tool-stats">
-          <div class="tool-stat"><svg><use href="#icon-check"/></svg><span>$1 or 2 refs</span></div>
+        
+        <div class="tool-carousel">
+          <!-- Page 1: Overview -->
+          <div class="tool-page">
+            <div class="tool-details">
+              <h4>Product Details</h4>
+              <p>Live Quotex market data streamed directly into MT4. Real-time candle creation and synchronization.</p>
+              <ul class="feature-list-sm">
+                <li><svg><use href="#icon-check"/></svg> Full MQL4 & Python Source Code</li>
+                <li><svg><use href="#icon-check"/></svg> Fully Editable & No Encryption</li>
+                <li><svg><use href="#icon-check"/></svg> Automatic MT4 detection & validation</li>
+                <li><svg><use href="#icon-check"/></svg> Multi-asset support (Forex & OTC)</li>
+                <li><svg><use href="#icon-check"/></svg> Auto-reconnect system with recovery</li>
+              </ul>
+              <div class="img-placeholder">MT4 Dashboard & Code Images Here</div>
+              <div class="tool-footer">
+                <div class="tool-stats">
+                  <button class="stat-item-btn like-btn" onclick="toggleLike(this)">
+                    <svg><use href="#icon-heart"/></svg>
+                    <span class="like-count">89</span>
+                  </button>
+                  <div class="stat-item-btn" style="cursor:default">
+                    <svg><use href="#icon-download"/></svg>
+                    <span>845</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Page 2: Usage -->
+          <div class="tool-page">
+            <div class="tool-details">
+              <h4>How to Download & Use</h4>
+              <ul class="step-list">
+                <li><span>1</span> Purchase the Source Code access.</li>
+                <li><span>2</span> Download the MQL4 and Python files.</li>
+                <li><span>3</span> Attach the script to your MT4 platform.</li>
+                <li><span>4</span> Stream Quotex data directly to offline charts.</li>
+              </ul>
+              <button class="btn btn-primary" style="width:100%;margin-top:12px" onclick="purchaseSourceCode()">
+                <svg><use href="#icon-download"/></svg> Download Source
+              </button>
+            </div>
+          </div>
+
+          <!-- Page 3: Pricing -->
+          <div class="tool-page">
+            <div class="tool-details">
+              <h4>Pricing & Plans</h4>
+              <div class="pricing-mini-card">
+                <div class="plan-name">Source Code</div>
+                <div class="plan-price">$55</div>
+                <p class="plan-desc">Full Source Code Access</p>
+                <button class="btn btn-secondary" style="width:100%">Buy Source</button>
+              </div>
+              <div class="pricing-mini-card featured">
+                <div class="plan-name">Monthly Subscription</div>
+                <div class="plan-price">$5</div>
+                <p class="plan-desc">Unlimited Access No Limits</p>
+                <button class="btn btn-primary" style="width:100%">Subscribe Monthly</button>
+              </div>
+              <div class="pricing-mini-card">
+                <div class="plan-name">Weekly Subscription</div>
+                <div class="plan-price">$2</div>
+                <p class="plan-desc">Unlimited Access No Limits</p>
+                <button class="btn btn-secondary" style="width:100%">Subscribe Weekly</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dots-container">
+          <div class="dot active"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+
+      <!-- TOOL 3: TELEGRAM SIGNAL BOT (PLACEHOLDER) -->
+      <div class="card tool-full-card">
+        <div class="tool-header">
+          <div class="tool-icon"><svg><use href="#icon-bot"/></svg></div>
+          <div class="tool-info">
+            <h3>Telegram Signal Bot</h3>
+            <p>Automated signal delivery bot</p>
+          </div>
+        </div>
+        <div class="tool-details">
+          <p>Automated bot to deliver signals directly to your Telegram channel or DM. (Details coming soon).</p>
+          <div class="tool-footer">
+            <div class="tool-stats">
+              <button class="stat-item-btn like-btn" onclick="toggleLike(this)">
+                <svg><use href="#icon-heart"/></svg>
+                <span class="like-count">12</span>
+              </button>
+            </div>
+            <button class="btn btn-secondary" disabled>Coming Soon</button>
+          </div>
         </div>
       </div>
     </div>
@@ -643,6 +853,7 @@ function enterPlatform(){
     document.getElementById('main-app').classList.add('visible');
     if(tg)tg.ready();
     updateUI();
+    initCarousels(); // Initialize carousels when app is visible
   },800);
 }
 
@@ -685,6 +896,7 @@ function generateSignals(){
 
 function purchaseReadyList(price){alert('Payment Gateway: $'+price)}
 function unlockWithReferrals(){if(userData.referrals>=2){alert('List unlocked!')}else{alert('You need 2 active referrals. Current: '+userData.referrals)}}
+function purchaseSourceCode(){alert('Source Code Download')}
 
 function copyRefLink(){
   const link=document.getElementById('refLink').value;
@@ -706,6 +918,51 @@ function updateUI(){
   document.getElementById('totalReferrals').textContent=userData.referrals;
   document.getElementById('balanceCash').textContent=userData.cashEarnings.toFixed(2)+'$';
   document.getElementById('balanceDays').textContent=userData.freeDays;
+}
+
+// ===== LIKE BUTTON INTERACTION =====
+function toggleLike(btn) {
+  const countSpan = btn.querySelector('.like-count');
+  let count = parseInt(countSpan.textContent);
+  
+  if (btn.classList.contains('active')) {
+    btn.classList.remove('active');
+    count -= 1;
+    countSpan.textContent = count;
+  } else {
+    btn.classList.add('active');
+    count += 1;
+    countSpan.textContent = count;
+    if(tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+  }
+}
+
+// ===== CAROUSEL DOTS INTERACTION =====
+function initCarousels() {
+  const carousels = document.querySelectorAll('.tool-carousel');
+  carousels.forEach(carousel => {
+    const dotsContainer = carousel.parentElement.querySelector('.dots-container');
+    if (!dotsContainer) return;
+    
+    const dots = dotsContainer.querySelectorAll('.dot');
+    
+    // Ensure scroll starts at 0
+    carousel.scrollLeft = 0; 
+    
+    carousel.addEventListener('scroll', () => {
+      const pageWidth = carousel.offsetWidth;
+      if (pageWidth === 0) return;
+      const activeIndex = Math.round(carousel.scrollLeft / pageWidth);
+      
+      dots.forEach((dot, index) => {
+        if (index === activeIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    });
+  });
 }
 </script>
 </body>
