@@ -1,87 +1,1661 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QXTerminal Logo (Static)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>QXTerminal — Real Market Signal Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body {
-    width: 100%;
-    height: 100%;
-    background: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-  .logo-container {
-    width: 300px;
-    height: 300px;
-  }
-  .logo-container svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-    overflow: visible;
-  }
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;background:#000;overflow:hidden;touch-action:manipulation;-webkit-text-size-adjust:100%}
+body{font-family:'Montserrat',Arial,sans-serif}
+
+/* LOGO STAGE */
+#logo-stage{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;z-index:10000;transition:z-index 0s 1.5s, background 1.5s ease;background:#000}
+.logo-container{width:300px;height:300px;position:relative;margin:auto;transition:transform 2.5s cubic-bezier(.25,.1,.25,1),opacity 2.5s ease;transform-origin:center 45%}
+.logo-container svg{width:100%;height:100%;overflow:visible;display:block}
+#logo-stage.to-bg{background:transparent;z-index:0}
+#logo-stage.to-bg .logo-container{transform:scale(2.2) translateY(20px);opacity:0.08}
+#logo-stage.to-bg #splashHexFill{fill:transparent;transition:fill 2s ease}
+.hexagon-border{fill:none;stroke:url(#cyanGrad);stroke-width:9;stroke-linecap:round;stroke-linejoin:round;animation:drawHex 1.5s ease-out forwards}
+.hexagon{fill:none;stroke:url(#blueGrad);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;animation:drawHex 1.5s ease-out forwards}
+.bar{animation:growBar 1s ease-out forwards;opacity:0;fill:#000;stroke:url(#cyanGrad);stroke-width:2;stroke-linejoin:round}
+.bar-1{animation-delay:.5s}.bar-2{animation-delay:.7s}.bar-3{animation-delay:.9s}
+.arrow-border{fill:none;stroke:url(#cyanGrad);stroke-width:10;stroke-linecap:round;stroke-linejoin:round}
+.arrow{fill:none;stroke:#000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+@keyframes drawHex{from{stroke-dasharray:1000;stroke-dashoffset:1000}to{stroke-dashoffset:0}}
+@keyframes growBar{from{transform:scaleY(0);transform-origin:bottom;opacity:0}to{transform:scaleY(1);transform-origin:bottom;opacity:1}}
+
+/* AVATAR LOGO */
+.avatar-logo-container{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.avatar-logo-svg{width:100%;height:100%;overflow:visible}
+.av-hexagon-border{fill:none;stroke-width:9;stroke-linecap:round;stroke-linejoin:round}
+.av-hexagon{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.av-bar{opacity:0;fill:#000;stroke-width:2;stroke-linejoin:round;transform-box: fill-box; transform-origin: center bottom;}
+.av-arrow-border{fill:none;stroke-width:10;stroke-linecap:round;stroke-linejoin:round}
+.av-arrow{fill:none;stroke:#000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.av-arrow-head{opacity:0}
+
+/* PAGES */
+.page-wrapper{position:fixed;top:0;left:0;width:100%;height:100%;z-index:10;opacity:0;pointer-events:none;transition:opacity .8s ease;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;scroll-behavior:smooth;background:transparent}
+.page-wrapper::-webkit-scrollbar{display:none}
+.page-wrapper.visible{opacity:1;pointer-events:all}
+
+/* LANDING */
+.landing-nav{position:sticky;top:0;height:56px;display:flex;justify-content:center;align-items:center;padding:0 20px;background:rgba(5,7,11,.95);border-bottom:1px solid rgba(255,255,255,.05);z-index:200}
+.nav-center{display:flex;align-items:center;width:100%;max-width:1100px;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-brand-logo{width:30px;height:30px}.nav-brand-logo svg{width:100%;height:100%}
+.nav-brand-text{font-size:15px;font-weight:700;color:#fff;letter-spacing:.8px}
+.nav-cta{background:rgba(0,210,255,.12);border:1px solid rgba(0,210,255,.3);color:#00d2ff;padding:6px 16px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;transition:all .25s}
+.nav-cta:hover{background:rgba(0,210,255,.2);border-color:rgba(0,210,255,.5)}
+
+.hero{min-height:90vh;display:flex;flex-direction:column;padding:110px 48px 50px;text-align:center;position:relative;z-index:10}
+.hero-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,210,255,.04) 0%,transparent 70%);top:40%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.hero-top{display:flex;flex-direction:column;align-items:center;flex:1;justify-content:flex-start;padding-top:20px}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.06);padding:5px 12px;border-radius:100px;font-size:10px;font-weight:600;color:rgba(255,255,255,.5);margin-bottom:22px}
+.hero-badge .dot{width:5px;height:5px;background:#00d2ff;border-radius:50%;animation:blinkDot 2s infinite}
+@keyframes blinkDot{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(34px,5.5vw,64px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:16px;max-width:950px}
+.hero h1 span{display:block;background:linear-gradient(135deg,#00d2ff,#00f0ff,#0099cc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(14px,1.6vw,17px);color:rgba(255,255,255,.6);max-width:780px;line-height:2;font-weight:400;margin-bottom:36px;letter-spacing:.2px}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.hero-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;text-decoration:none;transition:all .25s;cursor:pointer;border:none}
+.hero-btn.primary{background:linear-gradient(135deg,rgba(0,210,255,.15),rgba(0,153,204,.2));border:1px solid rgba(0,210,255,.35);color:#00d2ff}
+.hero-btn.primary:hover{background:linear-gradient(135deg,rgba(0,210,255,.28),rgba(0,153,204,.33));border-color:rgba(0,210,255,.55);transform:translateY(-2px)}
+.hero-btn.secondary{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+.hero-btn.secondary:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.9);transform:translateY(-2px)}
+
+.floating-stats{width:100%;max-width:950px;display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:auto;padding-top:40px;position:relative;z-index:20;flex-wrap:wrap}
+.stat-item-float{flex:1;max-width:300px;text-align:center;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.04);padding:18px 20px;border-radius:14px}
+.stat-number-float{font-size:clamp(18px,2.2vw,26px);font-weight:800;color:#fff;line-height:1;margin-bottom:5px}
+.stat-number-float span{color:#00d2ff}
+.stat-label-float{font-size:clamp(8px,.9vw,10px);font-weight:600;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.5px}
+
+.features-section, .levels-section{padding:80px 32px;max-width:1000px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:48px}
+.section-label{font-size:10px;font-weight:700;color:#00d2ff;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+.section-title{font-size:clamp(24px,4vw,36px);font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px}
+.section-title span{background:linear-gradient(135deg,#00d2ff,#00f0ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.section-desc{color:rgba(255,255,255,.5);max-width:500px;margin:0 auto;line-height:1.6;font-size:13px}
+
+.features-timeline{max-width:680px;margin:0 auto;position:relative;padding-right:60px}
+.features-timeline::before{content:'';position:absolute;right:24px;top:20px;bottom:20px;width:2px;background:linear-gradient(to bottom,#00d2ff,#00f0ff,#28c840);opacity:.25}
+.feature-item{position:relative;margin-bottom:22px;display:flex;align-items:stretch}
+.feature-item:last-child{margin-bottom:0}
+.feature-icon-wrap{position:absolute;right:-60px;top:18px;width:46px;height:46px;background:rgba(5,7,11,.9);border:1px solid rgba(0,210,255,.35);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#00d2ff;backdrop-filter:blur(8px);box-shadow:0 0 20px rgba(0,210,255,.15)}
+.feature-icon-wrap svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.feat-c-2{color:#f0a500;border-color:rgba(240,165,0,.35);box-shadow:0 0 20px rgba(240,165,0,.15)}
+.feat-c-3{color:#28c840;border-color:rgba(40,200,64,.35);box-shadow:0 0 20px rgba(40,200,64,.15)}
+.feature-info{flex:1;background:rgba(11,15,24,.6);border:1px solid rgba(255,255,255,.05);border-radius:14px;padding:18px 22px;transition:all .3s}
+.feature-info:hover{border-color:rgba(0,210,255,.15);background:rgba(11,15,24,.8)}
+.feature-info h4{font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.feature-info h4 span{font-size:11px;font-weight:600;color:#00d2ff;background:rgba(0,210,255,.1);padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace}
+.feature-info p{font-size:12px;color:rgba(255,255,255,.6);line-height:1.6}
+.feature-info p strong{color:#00f0ff}
+
+.levels-timeline{max-width:600px;margin:0 auto;position:relative;padding-left:50px}
+.levels-timeline::before{content:'';position:absolute;left:19px;top:15px;bottom:15px;width:2px;background:linear-gradient(to bottom,#28c840,#f0a500,#00d2ff,#fff);opacity:0.3}
+.level-item{position:relative;margin-bottom:32px;display:flex;gap:20px;align-items:flex-start}
+.level-item:last-child{margin-bottom:0}
+.level-icon-wrap{position:absolute;left:-50px;width:40px;height:40px;background:#05070b;border:1px solid rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.level-icon-wrap svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.level-1{color:#28c840;border-color:rgba(40,200,64,.4)}
+.level-2{color:#f0a500;border-color:rgba(240,165,0,.4)}
+.level-3{color:#00d2ff;border-color:rgba(0,210,255,.4)}
+.level-4{color:#fff;border-color:rgba(255,255,255,.4)}
+.level-info h4{font-size:14px;font-weight:700;color:#fff;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.level-info h4 span{font-size:11px;font-weight:600;color:#00d2ff;background:rgba(0,210,255,.1);padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace}
+.level-info p{font-size:12px;color:rgba(255,255,255,.6);line-height:1.5}
+.level-info p strong{color:#00f0ff}
+
+.pricing-section{padding:80px 32px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:850px;margin:0 auto;align-items:center}
+.pricing-card{background:rgba(11,15,24,.85);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:28px 20px;text-align:center;transition:all .4s}
+.pricing-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.12)}
+.pricing-card.featured{border-color:rgba(0,210,255,.25);background:rgba(0,210,255,.04);transform:scale(1.04);box-shadow:0 0 40px rgba(0,210,255,.08)}
+.pricing-card.featured:hover{transform:scale(1.04) translateY(-4px)}
+.plan-name{font-size:11px;font-weight:700;color:rgba(255,255,255,.45);margin-bottom:2px;text-transform:uppercase;letter-spacing:1px}
+.plan-price{font-family:'Montserrat';font-size:28px;font-weight:800;color:#fff;margin:10px 0}
+.plan-price span{font-size:12px;color:rgba(255,255,255,.35);font-weight:400}
+.plan-desc{color:rgba(255,255,255,.4);font-size:11px;line-height:1.4;margin-bottom:16px;min-height:32px}
+.plan-features{list-style:none;text-align:left;margin-bottom:16px}
+.plan-features li{padding:5px 0;font-size:11px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:8px}
+.plan-features li::before{content:'';display:inline-block;width:12px;height:12px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300d2ff' stroke-width='2.5'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");flex-shrink:0}
+.plan-btn{width:100%;padding:10px;border-radius:6px;font-weight:600;font-size:11px;cursor:pointer;transition:all .25s;border:none}
+.plan-btn.primary{background:#00d2ff;color:#000}.plan-btn.primary:hover{background:#00f0ff}
+.plan-btn.secondary{background:transparent;color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.08)}
+
+.landing-footer{padding:60px 32px 40px;background:rgba(5,7,11,.95);border-top:1px solid rgba(255,255,255,.05)}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;max-width:1000px;margin:0 auto 40px}
+.footer-brand p{color:rgba(255,255,255,.4);font-size:12px;margin-top:12px;line-height:1.6}
+.footer-col h4{font-size:12px;font-weight:700;color:#fff;margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{color:rgba(255,255,255,.4);text-decoration:none;font-size:12px;transition:color .2s}
+.footer-col a:hover{color:#00d2ff}
+.footer-social{display:flex;gap:12px;margin-top:16px}
+.footer-social a{width:44px;height:44px;border-radius:12px;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:#fff;transition:all .3s}
+.footer-social a:hover{background:rgba(0,210,255,0.15);border-color:rgba(0,210,255,0.6);color:#00d2ff;box-shadow:0 0 15px rgba(0,210,255,0.3);transform:translateY(-3px)}
+.footer-social svg{width:22px;height:22px;fill:currentColor;stroke:none}
+.footer-bottom{text-align:center;padding-top:24px;border-top:1px solid rgba(255,255,255,.05)}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,.3)}
+
+/* AUTH */
+#auth-page{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px}
+.auth-container{width:100%;max-width:320px;text-align:center;animation:slideUp .8s ease}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.auth-login-info{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:24px;line-height:1.6;text-align:center}
+.auth-user-info{background:rgba(0,210,255,.05);border-bottom:1px solid rgba(0,210,255,.15);padding:12px 0;margin-bottom:24px;display:flex;align-items:center;gap:12px;text-align:left}
+.auth-info-text{flex:1;overflow:hidden;text-align:left}
+.auth-name{font-size:14px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.auth-username{font-size:12px;color:rgba(0,210,255,.8);font-weight:600}
+.auth-checkbox-container{display:flex;align-items:flex-start;gap:8px;margin-bottom:20px;cursor:pointer;font-size:11px;color:rgba(255,255,255,.7);text-align:left;justify-content:center}
+.auth-checkbox-container input{margin-top:2px;accent-color:#00d2ff;width:14px;height:14px;flex-shrink:0;cursor:pointer}
+.auth-checkbox-container a{color:#00d2ff;text-decoration:none;font-weight:600}
+.auth-btn{width:100%;padding:14px;background:linear-gradient(135deg,#00d2ff,#0099cc);color:#000;border:none;border-radius:10px;font-family:'Montserrat';font-size:13px;font-weight:800;cursor:pointer;transition:all .3s;box-shadow:0 8px 20px rgba(0,210,255,.3);margin-top:6px}
+.auth-btn:active{transform:scale(0.98)}
+.auth-btn:disabled{background:rgba(0,210,255,0.2);color:rgba(255,255,255,0.4);box-shadow:none;cursor:not-allowed}
+.auth-footer{margin-top:16px;font-size:10px;color:rgba(255,255,255,.4)}
+
+/* MAIN APP */
+#main-app{display:flex;flex-direction:column}
+.app-header{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;background:rgba(5,7,11,.95);border-bottom:1px solid rgba(255,255,255,.05);position:sticky;top:0;z-index:200}
+.header-left{display:flex;align-items:center;gap:10px}
+.user-avatar-lg{width:40px;height:40px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.user-details h4{font-size:13px;font-weight:700;color:#fff;margin-bottom:1px}
+.user-details p{font-size:10px;color:rgba(0,210,255,.8);font-weight:600}
+.header-right{display:flex;gap:8px}
+.icon-btn-lg{width:34px;height:34px;border-radius:8px;background:rgba(11,15,24,.8);border:1px solid rgba(0,210,255,.15);display:flex;align-items:center;justify-content:center;color:#00d2ff;cursor:pointer;position:relative}
+.icon-btn-lg:active{background:rgba(0,210,255,.1)}
+.icon-btn-lg .badge{position:absolute;top:-2px;right:-2px;width:8px;height:8px;background:#ff4d6d;border-radius:50%;border:2px solid #000}
+.icon-btn-lg svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.main-content{flex:1;overflow-y:auto;overflow-x:hidden;padding:16px;padding-bottom:80px;scrollbar-width:none}
+.main-content::-webkit-scrollbar{display:none}
+.section{display:none;animation:fadeIn .5s ease}
+.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.card{background:rgba(11,15,24,.9);border:1px solid rgba(255,255,255,.04);border-radius:12px;padding:14px;margin-bottom:12px}
+.welcome-card{text-align:center;background:linear-gradient(135deg,rgba(0,210,255,.08),rgba(0,153,204,.03));border:1px solid rgba(0,210,255,.15)}
+.welcome-card h2{font-size:15px;font-weight:800;color:#fff;margin-bottom:6px}
+.welcome-card h2 span{color:#00d2ff}
+.welcome-card p{font-size:11px;color:rgba(255,255,255,.6);line-height:1.5}
+
+/* COMPACT STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+.stat-box{text-align:center;transition:all .3s;padding:8px 6px !important}
+.stat-box:active{transform:scale(0.97)}
+.stat-value-app{font-family:'Montserrat';font-size:15px;font-weight:800;color:#00d2ff;margin-bottom:1px;line-height:1}
+.stat-label-app{font-size:8px;color:rgba(255,255,255,.5);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+
+.section-header-app{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.04)}
+.section-title-app{font-size:14px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
+.section-title-app::before{content:'';width:3px;height:16px;background:#00d2ff;border-radius:3px}
+
+/* MISSIONS LOCKED PAGE */
+.missions-locked-page{position:relative;text-align:center;padding:40px 20px;min-height:calc(100vh - 200px);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.missions-lock-wrapper{position:relative;margin-bottom:24px}
+.missions-lock-icon{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,rgba(240,165,0,.15),rgba(240,165,0,.05));border:2px solid rgba(240,165,0,.35);display:flex;align-items:center;justify-content:center;color:#f0a500;margin:0 auto;box-shadow:0 0 60px rgba(240,165,0,.2);animation:lockPulse 3s ease-in-out infinite}
+.missions-lock-icon svg{width:54px;height:54px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@keyframes lockPulse{0%,100%{box-shadow:0 0 60px rgba(240,165,0,.2)}50%{box-shadow:0 0 80px rgba(240,165,0,.35)}}
+.missions-locked-title{font-size:22px;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:-.5px}
+.missions-locked-sub{font-size:12px;color:rgba(255,255,255,.5);max-width:280px;margin:0 auto 30px;line-height:1.6}
+.missions-blurred-preview{width:100%;max-width:340px;background:rgba(11,15,24,.6);border:1px solid rgba(255,255,255,.05);border-radius:14px;padding:16px;filter:blur(8px);pointer-events:none;user-select:none;opacity:.6}
+.blurred-mission-item{display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.3);border-radius:8px;padding:10px;margin-bottom:8px}
+.blurred-mission-item:last-child{margin-bottom:0}
+.blurred-check{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.1);flex-shrink:0}
+.blurred-lines{flex:1;display:flex;flex-direction:column;gap:4px}
+.blurred-line{height:6px;background:rgba(255,255,255,.15);border-radius:3px}
+.blurred-line.short{width:60%}
+.blurred-reward{width:40px;height:14px;background:rgba(240,165,0,.2);border-radius:4px}
+
+/* PROFILE */
+.profile-top{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
+.profile-left{display:flex;flex-direction:column;align-items:center;gap:8px;width:80px;flex-shrink:0}
+.profile-left .profile-name-sm{font-size:12px;font-weight:700;color:#fff;text-align:center}
+.profile-right{flex:1}
+.profile-info-row{display:flex;justify-content:space-between;margin-bottom:8px;font-size:12px}
+.profile-info-label{color:rgba(255,255,255,.5)}
+.profile-info-value{color:#fff;font-weight:600}
+.level-box{margin-top:12px;background:rgba(0,0,0,.2);border-radius:8px;padding:12px}
+.level-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.level-name-sm{font-size:12px;font-weight:700;color:#00d2ff;display:flex;align-items:center;gap:6px}
+.level-name-sm svg{width:14px;height:14px}
+.level-xp{font-size:11px;color:rgba(255,255,255,.5)}
+.level-progress{height:6px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden}
+.level-fill{height:100%;background:linear-gradient(90deg,#00d2ff,#00f0ff);border-radius:4px;transition:width 1s ease}
+
+.referral-card-enhanced h3{font-size:15px;font-weight:800;color:#fff;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.referral-options{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+.ref-option{display:flex;align-items:flex-start;gap:12px;background:rgba(0,0,0,.2);border-radius:10px;padding:12px}
+.ref-icon{width:32px;height:32px;border-radius:8px;background:rgba(0,210,255,.1);display:flex;align-items:center;justify-content:center;color:#00d2ff;flex-shrink:0}
+.ref-icon svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8}
+.ref-text h4{font-size:12px;font-weight:700;color:#fff;margin-bottom:2px}
+.ref-text p{font-size:11px;color:rgba(255,255,255,.6);line-height:1.4}
+
+/* MODAL */
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:4000;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.visible{opacity:1;pointer-events:all}
+.modal-sheet{position:fixed;bottom:0;left:0;width:100%;max-height:85%;background:rgba(11,15,24,.95);border-top:1px solid rgba(0,210,255,.2);border-radius:20px 20px 0 0;padding:20px;z-index:5000;transform:translateY(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);overflow-y:auto}
+.modal-sheet.visible{transform:translateY(0)}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.05)}
+.modal-title{font-size:16px;font-weight:800;color:#fff;display:flex;align-items:center;gap:10px}
+.modal-title svg{width:22px;height:22px;fill:none;stroke:#00d2ff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.modal-close{background:transparent;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:18px}
+.notif-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.notif-item:last-child{border-bottom:none}
+.notif-icon{width:36px;height:36px;border-radius:50%;background:rgba(0,210,255,.1);display:flex;align-items:center;justify-content:center;color:#00d2ff;flex-shrink:0}
+.notif-icon svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8}
+.notif-content h5{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px}
+.notif-content p{font-size:11px;color:rgba(255,255,255,.6);line-height:1.4}
+.notif-time{font-size:10px;color:rgba(255,255,255,.3);margin-top:4px;display:block}
+
+/* WALLET */
+.wallet-balance-card{background:linear-gradient(135deg,rgba(0,210,255,.12),rgba(0,153,204,.04));border:1px solid rgba(0,210,255,.25);border-radius:14px;padding:18px;margin-bottom:16px;text-align:center;position:relative;overflow:hidden}
+.wallet-balance-card::before{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(0,210,255,.2),transparent 70%);pointer-events:none}
+.wallet-balance-label{font-size:10px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
+.wallet-balance-value{font-size:28px;font-weight:800;color:#fff;font-family:'Montserrat';margin-bottom:4px}
+.wallet-balance-value span{color:#28c840;font-size:20px}
+.wallet-balance-sub{font-size:10px;color:rgba(255,255,255,.4)}
+.wallet-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.wallet-action-btn{padding:12px;border-radius:10px;font-family:'Montserrat';font-size:12px;font-weight:700;cursor:pointer;transition:all .25s;border:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.wallet-action-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+.wallet-deposit-btn{background:linear-gradient(135deg,rgba(40,200,64,.2),rgba(40,200,64,.08));border:1px solid rgba(40,200,64,.35);color:#28c840}
+.wallet-withdraw-btn{background:linear-gradient(135deg,rgba(255,77,109,.2),rgba(255,77,109,.08));border:1px solid rgba(255,77,109,.35);color:#ff4d6d}
+.wallet-tabs{display:flex;gap:4px;margin-bottom:14px;background:rgba(0,0,0,.3);padding:4px;border-radius:8px}
+.wallet-tab{flex:1;padding:7px;border-radius:6px;border:none;background:transparent;color:rgba(255,255,255,.4);font-family:'Montserrat';font-size:11px;font-weight:600;cursor:pointer;transition:all .3s}
+.wallet-tab.active{background:rgba(0,210,255,.12);color:#00d2ff;border:1px solid rgba(0,210,255,.2)}
+.wallet-panel{display:none}
+.wallet-panel.active{display:block;animation:fadeIn .3s ease}
+
+.method-card{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:14px;margin-bottom:10px;cursor:pointer;transition:all .25s}
+.method-card:hover{border-color:rgba(0,210,255,.2)}
+.method-card.selected{border-color:rgba(0,210,255,.4);background:rgba(0,210,255,.05)}
+.method-head{display:flex;align-items:center;gap:10px}
+.method-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.method-icon.binance{background:rgba(243,186,47,.12);color:#F0B90B}
+.method-icon.usdt{background:transparent}
+.method-icon svg{width:100%;height:100%}
+.method-name{font-size:12px;font-weight:700;color:#fff}
+.method-desc{font-size:10px;color:rgba(255,255,255,.4)}
+.method-fee{margin-left:auto;font-size:10px;color:#f0a500;font-weight:600;background:rgba(240,165,0,.1);padding:2px 8px;border-radius:4px}
+
+.wallet-form-group{margin-bottom:12px;margin-top:14px}
+.wallet-form-label{display:block;font-size:10px;font-weight:600;color:rgba(255,255,255,.5);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+.wallet-form-input{width:100%;padding:10px 12px;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:#fff;font-family:'Montserrat';font-size:12px;outline:none;transition:all .3s}
+.wallet-form-input:focus{border-color:#00d2ff;box-shadow:0 0 0 3px rgba(0,210,255,.1)}
+
+.tx-list{display:flex;flex-direction:column;gap:8px}
+.tx-item{display:flex;align-items:center;gap:12px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.04);border-radius:10px;padding:12px}
+.tx-icon{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tx-icon svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.5}
+.tx-icon.deposit{background:rgba(40,200,64,.12);color:#28c840}
+.tx-icon.withdraw{background:rgba(255,77,109,.12);color:#ff4d6d}
+.tx-info{flex:1;min-width:0}
+.tx-title{font-size:11px;font-weight:700;color:#fff;margin-bottom:2px}
+.tx-date{font-size:9px;color:rgba(255,255,255,.4);font-family:'JetBrains Mono',monospace}
+.tx-amount{font-size:13px;font-weight:800;font-family:'Montserrat'}
+.tx-amount.deposit{color:#28c840}
+.tx-amount.withdraw{color:#ff4d6d}
+.tx-status{font-size:9px;font-weight:600;padding:2px 6px;border-radius:4px;margin-top:3px;display:inline-block}
+.tx-status.completed{background:rgba(40,200,64,.15);color:#28c840}
+.tx-status.pending{background:rgba(240,165,0,.15);color:#f0a500}
+
+/* TOOL CARDS */
+.tool-full-card{padding:14px;margin-bottom:14px;overflow:hidden;background:rgba(11,15,24,.9)}
+.tool-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.tool-icon{width:38px;height:38px;border-radius:8px;background:rgba(0,210,255,.06);display:flex;align-items:center;justify-content:center;color:#00d2ff;border:1px solid rgba(0,210,255,.1);flex-shrink:0}
+.tool-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tool-info h3{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px}
+.tool-info p{font-size:10px;color:rgba(255,255,255,.5)}
+
+.tool-carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;width:100%;gap:0;align-items:stretch}
+.tool-carousel::-webkit-scrollbar{display:none}
+.tool-page{min-width:100%;scroll-snap-align:start;padding-right:14px;box-sizing:border-box;display:flex;flex-direction:column}
+
+.tool-details{margin-top:10px;padding-top:12px;border-top:1px solid rgba(255,255,255,.04);flex:1}
+.tool-details h4{font-size:12px;font-weight:700;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.tool-details h4::before{content:'';width:2px;height:12px;background:#00d2ff;border-radius:2px}
+.tool-details p{font-size:11px;color:rgba(255,255,255,.55);margin-bottom:10px;line-height:1.6}
+
+/* PORTRAIT IMAGE PLACEHOLDER */
+.img-placeholder{width:100%; aspect-ratio: 3/4; background:linear-gradient(135deg,rgba(0,210,255,.06),rgba(0,0,0,.5)); border:1px solid rgba(0,210,255,.15); border-radius:12px; margin:10px 0 14px; display: flex; flex-direction:column; align-items: center; justify-content: center; gap:8px; color: rgba(0,210,255,.5); font-size: 11px; font-weight:600; letter-spacing:.5px; position:relative; overflow:hidden}
+.img-placeholder::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(0,210,255,.12),transparent 60%)}
+.img-placeholder::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.4) 100%)}
+.img-placeholder-text{position:relative;z-index:1;text-align:center;padding:0 20px}
+.img-placeholder-icon{position:relative;z-index:1;opacity:.6}
+.img-placeholder-icon svg{width:40px;height:40px;fill:none;stroke:currentColor;stroke-width:1.5}
+
+.step-list{list-style:none;margin-bottom:16px;display:flex;flex-direction:column;gap:10px}
+.step-list li{font-size:11px;color:rgba(255,255,255,.65);display:flex;gap:10px;align-items:center;padding:8px 10px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.03);border-radius:8px;line-height:1.5}
+.step-list li span{background:rgba(0,210,255,.15);color:#00d2ff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;border:1px solid rgba(0,210,255,.2)}
+
+.feature-list-sm{list-style:none;margin-top:8px;margin-bottom:12px;display:flex;flex-direction:column;gap:6px}
+.feature-list-sm li{font-size:11px;color:rgba(255,255,255,.6);display:flex;align-items:flex-start;gap:8px;padding:6px 0;line-height:1.5}
+.feature-list-sm li svg{width:13px;height:13px;color:#00d2ff;flex-shrink:0;margin-top:2px}
+
+.tool-footer{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px;flex-wrap:wrap}
+.tool-stats{display:flex;gap:10px;align-items:center}
+.stat-item-btn{display:flex;align-items:center;gap:5px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.5);font-size:11px;font-weight:600;cursor:pointer;padding:6px 10px;border-radius:6px;transition:all .3s}
+.stat-item-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8}
+.stat-item-btn:hover{background:rgba(255,255,255,.05)}
+.like-btn.active{color:#ff4d6d;border-color:rgba(255,77,109,.3);background:rgba(255,77,109,.1)}
+.like-btn.active svg{fill:#ff4d6d;stroke:#ff4d6d}
+
+.dots-container{display:flex;justify-content:center;gap:6px;margin-top:12px;width:100%}
+.dot{width:6px;height:6px;background:rgba(255,255,255,.2);border-radius:50%;transition:all .3s}
+.dot.active{background:#00d2ff;width:18px;border-radius:3px}
+
+.comments-section{margin-top:16px;background:rgba(0,0,0,.2);border-radius:10px;padding:12px}
+.comments-section h5{font-size:11px;color:rgba(255,255,255,.6);margin-bottom:10px;font-weight:600;display:flex;align-items:center;gap:6px}
+.comments-section h5::before{content:'';width:2px;height:10px;background:#00d2ff;border-radius:2px}
+.comment-item{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.comment-item:last-child{border-bottom:none}
+.comment-author{font-size:11px;font-weight:700;color:#00d2ff}
+.comment-text{font-size:10px;color:rgba(255,255,255,.6);margin-top:3px;line-height:1.5}
+
+.pricing-mini-card{background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:14px;margin-bottom:10px}
+.pricing-mini-card.featured{border-color:rgba(0,210,255,.3);background:rgba(0,210,255,.05);box-shadow:0 4px 20px rgba(0,210,255,.1)}
+.pricing-mini-card .plan-name{margin-bottom:4px}
+.pricing-mini-card .plan-price{font-size:22px;margin:4px 0}
+.pricing-mini-card .plan-desc{font-size:10px;margin-bottom:10px;min-height:auto}
+
+.tabs{display:flex;gap:6px;margin-bottom:14px;background:rgba(11,15,24,.9);padding:4px;border-radius:8px;border:1px solid rgba(255,255,255,.04)}
+.tab{flex:1;padding:8px;border-radius:6px;border:none;background:transparent;color:rgba(255,255,255,.4);font-family:'Montserrat';font-size:12px;font-weight:600;cursor:pointer;transition:all .3s}
+.tab.active{background:rgba(0,210,255,.1);color:#00d2ff;border:1px solid rgba(0,210,255,.2)}
+
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:10px;font-weight:600;color:rgba(255,255,255,.5);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+.form-input{width:100%;padding:10px 12px;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.06);border-radius:8px;color:#fff;font-family:'Montserrat';font-size:12px;outline:none;transition:all .3s}
+.form-input:focus{border-color:#00d2ff;box-shadow:0 0 0 3px rgba(0,210,255,.1)}
+.range-container{display:flex;align-items:center;gap:12px;margin-top:8px}
+.range-slider{flex:1;height:4px;background:rgba(255,255,255,.1);border-radius:4px;outline:none;accent-color:#00d2ff}
+.range-value{font-family:'Montserrat';font-weight:800;color:#00d2ff;font-size:16px;min-width:35px;text-align:center}
+.form-hint{font-size:11px;color:rgba(240,165,0,.9);margin-top:8px;padding:8px;background:rgba(240,165,0,.08);border-radius:6px;border:1px solid rgba(240,165,0,.2);line-height:1.4;display:flex;align-items:flex-start;gap:6px}
+.form-hint svg{width:14px;height:14px;flex-shrink:0}
+
+.btn{padding:10px 16px;border-radius:8px;font-family:'Montserrat';font-size:12px;font-weight:700;cursor:pointer;transition:all .3s;border:none;display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none}
+.btn-primary{background:linear-gradient(135deg,#00d2ff,#0099cc);color:#000;box-shadow:0 4px 12px rgba(0,210,255,.2)}
+.btn-primary:active{transform:scale(0.97)}
+.btn-secondary{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.08)}
+.btn-secondary:active{background:rgba(255,255,255,.1)}
+.btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8}
+
+.balance-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.balance-card{padding:12px 8px;text-align:center;transition:all .3s;cursor:pointer}
+.balance-card:active{transform:scale(0.97)}
+.balance-card:hover{border-color:rgba(0,210,255,.2)}
+.balance-amount{font-family:'Montserrat';font-size:16px;font-weight:800;color:#00d2ff;margin-bottom:2px}
+.balance-amount.cash{color:#28c840}
+.balance-label{font-size:9px;color:rgba(255,255,255,.5);font-weight:600;text-transform:uppercase;letter-spacing:1px}
+
+.ref-link-container{display:flex;gap:6px;margin-top:8px}
+.ref-link-container input{flex:1;padding:8px 10px;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.06);border-radius:6px;color:rgba(255,255,255,.5);font-size:11px;outline:none}
+.copy-btn{padding:8px 12px;background:#00d2ff;color:#000;border:none;border-radius:6px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.copy-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8}
+
+/* BOTTOM NAV */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:60px;background:rgba(5,7,11,.95);border-top:1px solid rgba(0,210,255,.1);display:flex;justify-content:space-around;align-items:center;z-index:300;padding-bottom:env(safe-area-inset-bottom)}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;opacity:.4;transition:all .3s;width:20%;position:relative}
+.nav-item.active{opacity:1}
+.nav-item.active .nav-icon{color:#00d2ff;transform:translateY(-2px)}
+.nav-item.active .nav-label{color:#00d2ff;font-weight:700}
+.nav-icon{width:20px;height:20px;color:#fff;transition:all .3s;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav-label{font-size:9px;font-weight:600;color:rgba(255,255,255,.5)}
+
+.nav-badge{position:absolute;top:-2px;right:calc(50% - 16px);min-width:16px;height:16px;padding:0 4px;background:#ff4d6d;border-radius:10px;color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #05070b;font-family:'JetBrains Mono',monospace;box-shadow:0 0 8px rgba(255,77,109,.5);animation:badgePulse 2s ease-in-out infinite}
+@keyframes badgePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.nav-badge.hidden{display:none}
+
+@media(max-width:900px){
+  .pricing-grid{grid-template-columns:1fr 1fr;max-width:500px;margin:0 auto}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .pricing-card.featured{transform:scale(1)}
+  .pricing-card.featured:hover{transform:translateY(-4px)}
+  .floating-stats{gap:20px}
+}
+
+@media (max-width:600px){
+  .hero{min-height:calc(100vh - 56px);padding:70px 18px 24px}
+  .hero-top{padding-top:10px}
+  .hero-badge{font-size:9px;padding:5px 10px;margin-bottom:16px}
+  .hero h1{font-size:clamp(26px,8vw,32px);line-height:1.12;letter-spacing:-0.7px;margin-bottom:14px;max-width:350px}
+  .hero h1 span{display:inline}
+  .hero-sub{font-size:12px;line-height:1.9;max-width:340px;margin-bottom:24px}
+  .hero-actions{flex-direction:row;gap:10px;align-items:center;justify-content:center;width:auto;margin-top:14px}
+  .hero-btn{width:auto;min-width:auto;flex:none;padding:10px 20px;font-size:12px}
+  .floating-stats{gap:8px;padding:0 12px;padding-top:24px;flex-wrap:nowrap}
+  .stat-item-float{padding:7px 8px;min-width:0;flex:1}
+  .stat-number-float{font-size:12px}
+  .stat-label-float{font-size:7px;line-height:1.2}
+  .hero-glow{width:360px;height:360px;top:35%}
+  .pricing-grid,.footer-grid{grid-template-columns:1fr;max-width:360px;margin:0 auto}
+  .features-timeline{padding-right:50px}
+  .feature-icon-wrap{right:-50px;width:40px;height:40px}
+  .feature-info{padding:14px 16px}
+  .wallet-balance-value{font-size:24px}
+  .wallet-action-btn{padding:10px;font-size:11px}
+  .missions-locked-page{padding:30px 16px;min-height:calc(100vh - 180px)}
+  .missions-lock-icon{width:90px;height:90px}
+  .missions-lock-icon svg{width:44px;height:44px}
+  .missions-locked-title{font-size:20px}
+  .method-icon{width:38px;height:38px}
+}
+
+@media (min-width:901px){
+  .bottom-nav{top:0;left:0;right:auto;bottom:0;width:84px;height:100%;flex-direction:column;justify-content:flex-start;align-items:center;gap:8px;padding:24px 0;border-top:none;border-right:1px solid rgba(0,210,255,.1)}
+  .bottom-nav .nav-item{width:auto;padding:10px 0}
+  .main-content{padding-left:100px;padding-bottom:16px}
+  #main-app .app-header{padding-left:100px}
+  .nav-badge{right:auto;left:calc(50% + 8px);top:4px}
+}
 </style>
 </head>
 <body>
 
-<div class="logo-container">
-  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" style="stop-color:#00d2ff"/>
-        <stop offset="40%" style="stop-color:#0099cc"/>
-        <stop offset="100%" style="stop-color:#00f0ff"/>
-      </linearGradient>
-      <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" style="stop-color:#09111f"/>
-        <stop offset="50%" style="stop-color:#000"/>
-        <stop offset="100%" style="stop-color:#070d18"/>
-      </linearGradient>
-      <clipPath id="hexagonClip">
-        <path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z"/>
-      </clipPath>
-    </defs>
+<!-- SVG Icons -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="icon-home" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+    <symbol id="icon-signals" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+    <symbol id="icon-list" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></symbol>
+    <symbol id="icon-profile" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+    <symbol id="icon-bell" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></symbol>
+    <symbol id="icon-support" viewBox="0 0 24 24"><path d="M4 13v-1.5C4 6.5 7.6 2.5 12 2.5s8 4 8 9V13"/><path d="M4 13.5c0 .8.7 1.5 1.5 1.5h1c.8 0 1.5-.7 1.5-1.5v-2c0-.8-.7-1.5-1.5-1.5h-1c-.8 0-1.5.7-1.5 1.5v2z"/><path d="M20 13.5c0 .8-.7 1.5-1.5 1.5h-1c-.8 0-1.5-.7-1.5-1.5v-2c0-.8.7-1.5 1.5-1.5h1c.8 0 1.5.7 1.5 1.5v2z"/><path d="M18 15v1a6 6 0 0 1-6 6"/></symbol>
+    <symbol id="icon-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="icon-tool" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+    <symbol id="icon-lightning" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="icon-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="icon-trend-up" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
+    <symbol id="icon-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+    <symbol id="icon-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+    <symbol id="icon-bot" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></symbol>
+    <symbol id="icon-heart" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
+    <symbol id="icon-gift" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></symbol>
+    <symbol id="icon-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <!-- WALLET ICON -->
+    <symbol id="icon-wallet" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-arrow-up" viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></symbol>
+    <symbol id="icon-arrow-down" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></symbol>
+    <symbol id="icon-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="icon-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+    <symbol id="icon-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></symbol>
+    
+    <!-- LEVEL ICONS -->
+    <symbol id="icon-sprout" viewBox="0 0 24 24"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.8c2.5 2.4 2.8 6.2.5 9.4-2.2-1.8-3.4-5.6-.5-9.4z"/><path d="M14.1 6c-.8 4.7-3.6 6.5-6.1 6.5-1.2 0-2.3-.4-3-1.2-1.2-1.4-1-3.5.5-4.8C7 5 10.1 4.2 14.1 6z"/></symbol>
+    <symbol id="icon-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
+    <symbol id="icon-gem" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></symbol>
+    <symbol id="icon-crown" viewBox="0 0 24 24"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7z"/></symbol>
 
-    <!-- خلفية السداسي -->
-    <path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="#000"/>
+    <!-- BINANCE OFFICIAL LOGO (from simple-icons) -->
+    <symbol id="icon-binance" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 2L8.529 5.471l2.132 2.132L12 6.264l1.339 1.339 2.132-2.132L12 2zM5.471 8.529L2 12l3.471 3.471 2.132-2.132L6.264 12l1.339-1.339-2.132-2.132zM12 9.393L9.868 11.525 12 13.657l2.132-2.132L12 9.393zm6.529-.864l-2.132 2.132L17.736 12l-1.339 1.339 2.132 2.132L22 12l-3.471-3.471zM12 15.736l-3.471 3.471L12 22l3.471-3.471L12 15.736z"/>
+    </symbol>
+    <!-- USDT OFFICIAL LOGO -->
+    <symbol id="icon-usdt" viewBox="0 0 256 256">
+      <circle cx="128" cy="128" r="128" fill="#26A17B"/>
+      <path fill="#fff" d="M142.7 139.2v-.1c-.8.1-4.9.3-14.1.3-7.3 0-12.5-.2-14.3-.3v.1c-36.4-1.6-63.6-7.9-63.6-15.4s27.2-13.8 63.6-15.4v24.5c1.8.1 7.1.5 14.4.5 9 0 13.2-.4 14-.5v-24.5c36.3 1.6 63.4 7.9 63.4 15.4s-27.1 13.8-63.4 15.4zm0-33.3V96h48.6V72H64.8v24h48.5v9.9c-39.4 1.8-69 9.6-69 21.4s29.6 19.6 69 21.4v31.8h29.4v-31.8c39.3-1.8 68.8-9.6 68.8-21.4s-29.5-19.6-68.8-21.4z"/>
+    </symbol>
 
-    <!-- الأعمدة داخل السداسي -->
-    <g clip-path="url(#hexagonClip)">
-      <rect x="65" y="110" width="18" height="50" rx="2" fill="#000" stroke="url(#cyanGrad)" stroke-width="2" stroke-linejoin="round" transform="scale(1)" style="transform-origin: bottom; opacity: 1;"/>
-      <rect x="91" y="85" width="18" height="75" rx="2" fill="#000" stroke="url(#cyanGrad)" stroke-width="2" stroke-linejoin="round" transform="scale(1)" style="transform-origin: bottom; opacity: 1;"/>
-      <rect x="117" y="60" width="18" height="100" rx="2" fill="#000" stroke="url(#cyanGrad)" stroke-width="2" stroke-linejoin="round" transform="scale(1)" style="transform-origin: bottom; opacity: 1;"/>
-    </g>
+    <!-- SOCIAL ICONS -->
+    <symbol id="icon-facebook" viewBox="0 0 24 24"><path d="M9 8H6v4h3v8h4v-8h3.5l.5-4h-4V6.5c0-1 .3-1.5 1.5-1.5H17V2h-3.5C10.5 2 9 3.5 9 6v2z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="icon-x" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="icon-instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></symbol>
+    <symbol id="icon-telegram" viewBox="0 0 24 24"><path d="M21.5 4.5L2.5 12l5 2 2 6 3-4 5 4z" fill="currentColor" stroke="none"/></symbol>
+  </defs>
+</svg>
 
-    <!-- حدود السداسي الخارجية -->
-    <path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z"
-          fill="none" stroke="url(#cyanGrad)" stroke-width="9"
-          stroke-linecap="round" stroke-linejoin="round"/>
-
-    <!-- الخط الداخلي للسداسي -->
-    <path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z"
-          fill="none" stroke="url(#blueGrad)" stroke-width="3"
-          stroke-linecap="round" stroke-linejoin="round"/>
-
-    <!-- مسار السهم -->
-    <path d="M35 125 L75 90 L100 105 L165 45"
-          fill="none" stroke="url(#cyanGrad)" stroke-width="10"
-          stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M35 125 L75 90 L100 105 L165 45"
-          fill="none" stroke="#000" stroke-width="5"
-          stroke-linecap="round" stroke-linejoin="round"/>
-
-    <!-- رأس السهم -->
-    <g transform="translate(165,45) rotate(-42.7)">
-      <path d="M-25 -15 L12 0 L-25 15 Z"
-            fill="#000" stroke="#00d2ff" stroke-width="2" stroke-linejoin="round"/>
-    </g>
-  </svg>
+<!-- LOGO STAGE -->
+<div id="logo-stage">
+  <div class="logo-container" id="logoContainer">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00d2ff"/><stop offset="40%" style="stop-color:#0099cc"/><stop offset="100%" style="stop-color:#00f0ff"/></linearGradient>
+        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#09111f"/><stop offset="50%" style="stop-color:#000"/><stop offset="100%" style="stop-color:#070d18"/></linearGradient>
+        <clipPath id="hexagonClip"><path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z"/></clipPath>
+      </defs>
+      <path id="splashHexFill" d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="#000"/>
+      <g clip-path="url(#hexagonClip)">
+        <rect class="bar bar-1" x="65" y="110" width="18" height="50" rx="2"/>
+        <rect class="bar bar-2" x="91" y="85" width="18" height="75" rx="2"/>
+        <rect class="bar bar-3" x="117" y="60" width="18" height="100" rx="2"/>
+      </g>
+      <path class="hexagon-border" d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z"/>
+      <path class="hexagon" d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z"/>
+      <path id="arrowPathRef" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="none"/>
+      <path class="arrow-border" d="M35 125 L75 90 L100 105 L165 45"/>
+      <path class="arrow" d="M35 125 L75 90 L100 105 L165 45"/>
+      <g id="arrowHeadGroup" style="opacity:0;transform:translate(0px,0px) rotate(0deg)"><path d="M-25 -15 L12 0 L-25 15 Z" fill="#000" stroke="#00d2ff" stroke-width="2" stroke-linejoin="round"/></g>
+    </svg>
+  </div>
 </div>
 
+<!-- LANDING PAGE -->
+<div id="landing-page" class="page-wrapper">
+  <nav class="landing-nav">
+    <div class="nav-center">
+      <a class="nav-brand">
+        <div class="nav-brand-logo avatar-logo-container">
+          <svg class="avatar-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+            <defs>
+              <linearGradient id="cyanNav" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00d2ff"/><stop offset="40%" style="stop-color:#0099cc"/><stop offset="100%" style="stop-color:#00f0ff"/></linearGradient>
+              <linearGradient id="blueNav" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#09111f"/><stop offset="50%" style="stop-color:#000"/><stop offset="100%" style="stop-color:#070d18"/></linearGradient>
+              <clipPath id="hexClipNav"><path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z"/></clipPath>
+            </defs>
+            <path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="#000"/>
+            <g clip-path="url(#hexClipNav)">
+              <rect class="av-bar" x="65" y="110" width="18" height="50" rx="2" fill="#000" stroke="url(#cyanNav)" stroke-width="2"/>
+              <rect class="av-bar" x="91" y="85" width="18" height="75" rx="2" fill="#000" stroke="url(#cyanNav)" stroke-width="2"/>
+              <rect class="av-bar" x="117" y="60" width="18" height="100" rx="2" fill="#000" stroke="url(#cyanNav)" stroke-width="2"/>
+            </g>
+            <path class="av-hexagon-border" d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="none" stroke="url(#cyanNav)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="av-hexagon" d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="none" stroke="url(#blueNav)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="av-arrowPathRef" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="none"/>
+            <path class="av-arrow-border" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="url(#cyanNav)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="av-arrow" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <g class="av-arrow-head" style="opacity:0;transform:translate(0px,0px) rotate(0deg)"><path d="M-25 -15 L12 0 L-25 15 Z" fill="#000" stroke="#00d2ff" stroke-width="2" stroke-linejoin="round"/></g>
+          </svg>
+        </div>
+        <div class="nav-brand-text">QXTerminal</div>
+      </a>
+      <button class="nav-cta" onclick="enterApp()">Get Started</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-top">
+      <div class="hero-badge"><span class="dot"></span>Real Market Signal Platform</div>
+      <h1>Real Market Signals <span>Built for Precision</span></h1>
+      <p class="hero-sub">We specialize in actual time-based signals and lists for the Binary Options real market. Professional tools to help you execute at the exact time, plus build your capital from scratch via referrals and points.</p>
+      <div class="hero-actions">
+        <button class="hero-btn primary" onclick="enterApp()">Explore Tools</button>
+        <button class="hero-btn secondary" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">How It Works</button>
+      </div>
+    </div>
+    <div class="floating-stats">
+      <div class="stat-item-float"><div class="stat-number-float">10<span>+</span></div><div class="stat-label-float">Real Market Pairs</div></div>
+      <div class="stat-item-float"><div class="stat-number-float">24/7</div><div class="stat-label-float">Real-Time Scanning</div></div>
+      <div class="stat-item-float"><div class="stat-number-float">0$</div><div class="stat-label-float">Start from Scratch</div></div>
+    </div>
+  </section>
+
+  <section class="features-section" id="features">
+    <div class="section-header">
+      <div class="section-label">Features</div>
+      <h2 class="section-title">Why Choose <span>QXTerminal</span>?</h2>
+      <p class="section-desc">We provide precise tools designed for real binary options market traders.</p>
+    </div>
+    <div class="features-timeline">
+      <div class="feature-item">
+        <div class="feature-icon-wrap"><svg><use href="#icon-clock"/></svg></div>
+        <div class="feature-info">
+          <h4>Accurate Time-Based Signals <span>+10 Points Free</span></h4>
+          <p>We focus on actual entry times rather than just prices. Get instant, ready-to-execute time-based lists for the real market.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon-wrap feat-c-2"><svg><use href="#icon-target"/></svg></div>
+        <div class="feature-info">
+          <h4>Real Market Tools</h4>
+          <p>Direct and active trading tools for the Binary Options market. Instant execution at the exact second without delay.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon-wrap feat-c-3"><svg><use href="#icon-trend-up"/></svg></div>
+        <div class="feature-info">
+          <h4>Build Capital from Scratch <span>0$ Start</span></h4>
+          <p>Start with zero capital! Use our referral system to collect points, transfer them, and build your trading capital step by step.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="levels-section" id="levels">
+    <div class="section-header">
+      <div class="section-label">Reward System</div>
+      <h2 class="section-title">Levels & <span>Gifts</span></h2>
+      <p class="section-desc">Earn XP by using tools and referring friends. Climb the levels to unlock exclusive rewards!</p>
+    </div>
+    <div class="levels-timeline">
+      <div class="level-item">
+        <div class="level-icon-wrap level-1"><svg><use href="#icon-sprout"/></svg></div>
+        <div class="level-info">
+          <h4>Level 1 — Starter <span>0–49 XP</span></h4>
+          <p>Access to basic signal generation & <strong>5 points</strong> per referral.</p>
+        </div>
+      </div>
+      <div class="level-item">
+        <div class="level-icon-wrap level-2"><svg><use href="#icon-rocket"/></svg></div>
+        <div class="level-info">
+          <h4>Level 2 — Pro <span>50–299 XP</span></h4>
+          <p><strong>10% discount</strong> on all ready lists & priority support.</p>
+        </div>
+      </div>
+      <div class="level-item">
+        <div class="level-icon-wrap level-3"><svg><use href="#icon-gem"/></svg></div>
+        <div class="level-info">
+          <h4>Level 3 — Master <span>300–999 XP</span></h4>
+          <p>Free weekly ready list & <strong>15% discount</strong> on source code.</p>
+        </div>
+      </div>
+      <div class="level-item">
+        <div class="level-icon-wrap level-4"><svg><use href="#icon-crown"/></svg></div>
+        <div class="level-info">
+          <h4>Level 4 — Legend <span>1000+ XP</span></h4>
+          <p>Free monthly subscription & <strong>35% referral commission</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing-section" id="pricing">
+    <div class="section-header">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Choose Your <span>Plan</span></h2>
+      <p class="section-desc">Flexible options for every trader</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="plan-name">Free (Referrals)</div>
+        <div class="plan-price">0$<span>/Forever</span></div>
+        <p class="plan-desc">Start building your capital from scratch</p>
+        <ul class="plan-features">
+          <li>Collect points via referrals</li>
+          <li>Daily ready-made lists</li>
+          <li>Transfer points between users</li>
+        </ul>
+        <button class="plan-btn secondary" onclick="enterApp()">Start Free</button>
+      </div>
+      <div class="pricing-card featured">
+        <div class="plan-name">Monthly Pro</div>
+        <div class="plan-price">5$<span>/month</span></div>
+        <p class="plan-desc">For professional active traders</p>
+        <ul class="plan-features">
+          <li>120 points monthly</li>
+          <li>All ready-made lists FREE</li>
+          <li>30% referral commission</li>
+        </ul>
+        <button class="plan-btn primary" onclick="enterApp()">Subscribe Now</button>
+      </div>
+      <div class="pricing-card">
+        <div class="plan-name">Per List</div>
+        <div class="plan-price">1$<span>/list</span></div>
+        <p class="plan-desc">For occasional time trading</p>
+        <ul class="plan-features">
+          <li>20 time-based signals</li>
+          <li>Daily ready lists</li>
+          <li>Basic support</li>
+        </ul>
+        <button class="plan-btn secondary" onclick="enterApp()">Purchase</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="landing-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-brand" style="margin-bottom:16px">
+          <div class="nav-brand-logo avatar-logo-container">
+            <svg class="avatar-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+              <defs>
+                <linearGradient id="cyanFoot" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00d2ff"/><stop offset="40%" style="stop-color:#0099cc"/><stop offset="100%" style="stop-color:#00f0ff"/></linearGradient>
+                <linearGradient id="blueFoot" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#09111f"/><stop offset="50%" style="stop-color:#000"/><stop offset="100%" style="stop-color:#070d18"/></linearGradient>
+                <clipPath id="hexClipFoot"><path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z"/></clipPath>
+              </defs>
+              <path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="#000"/>
+              <g clip-path="url(#hexClipFoot)">
+                <rect class="av-bar" x="65" y="110" width="18" height="50" rx="2" fill="#000" stroke="url(#cyanFoot)" stroke-width="2"/>
+                <rect class="av-bar" x="91" y="85" width="18" height="75" rx="2" fill="#000" stroke="url(#cyanFoot)" stroke-width="2"/>
+                <rect class="av-bar" x="117" y="60" width="18" height="100" rx="2" fill="#000" stroke="url(#cyanFoot)" stroke-width="2"/>
+              </g>
+              <path class="av-hexagon-border" d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="none" stroke="url(#cyanFoot)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+              <path class="av-hexagon" d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="none" stroke="url(#blueFoot)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path class="av-arrowPathRef" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="none"/>
+              <path class="av-arrow-border" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="url(#cyanFoot)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+              <path class="av-arrow" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <g class="av-arrow-head" style="opacity:0;transform:translate(0px,0px) rotate(0deg)"><path d="M-25 -15 L12 0 L-25 15 Z" fill="#000" stroke="#00d2ff" stroke-width="2" stroke-linejoin="round"/></g>
+            </svg>
+          </div>
+          <div class="nav-brand-text">QXTerminal</div>
+        </a>
+        <p>Real-time signal engine built for Telegram. Designed for traders who need precision in Binary Options.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#features">What We Offer</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#levels">Reward System</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Refund Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><svg><use href="#icon-facebook"/></svg></a>
+          <a href="#" aria-label="X"><svg><use href="#icon-x"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg><use href="#icon-instagram"/></svg></a>
+          <a href="#" aria-label="Telegram"><svg><use href="#icon-telegram"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 QXTerminal. All rights reserved. Trading involves risk.</p>
+    </div>
+  </footer>
+</div>
+
+<!-- AUTH PAGE -->
+<div id="auth-page" class="page-wrapper">
+  <div class="auth-container">
+    <div class="auth-user-info">
+      <div class="avatar-logo-container" style="width:50px;height:50px;flex-shrink:0">
+        <svg class="avatar-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+          <defs>
+            <linearGradient id="cyanAuthUser" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00d2ff"/><stop offset="40%" style="stop-color:#0099cc"/><stop offset="100%" style="stop-color:#00f0ff"/></linearGradient>
+            <linearGradient id="blueAuthUser" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#09111f"/><stop offset="50%" style="stop-color:#000"/><stop offset="100%" style="stop-color:#070d18"/></linearGradient>
+            <clipPath id="hexClipAuthUser"><path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z"/></clipPath>
+          </defs>
+          <path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="#000"/>
+          <g clip-path="url(#hexClipAuthUser)">
+            <rect class="av-bar" x="65" y="110" width="18" height="50" rx="2" fill="#000" stroke="url(#cyanAuthUser)" stroke-width="2"/>
+            <rect class="av-bar" x="91" y="85" width="18" height="75" rx="2" fill="#000" stroke="url(#cyanAuthUser)" stroke-width="2"/>
+            <rect class="av-bar" x="117" y="60" width="18" height="100" rx="2" fill="#000" stroke="url(#cyanAuthUser)" stroke-width="2"/>
+          </g>
+          <path class="av-hexagon-border" d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="none" stroke="url(#cyanAuthUser)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="av-hexagon" d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="none" stroke="url(#blueAuthUser)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="av-arrowPathRef" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="none"/>
+          <path class="av-arrow-border" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="url(#cyanAuthUser)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="av-arrow" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <g class="av-arrow-head" style="opacity:0;transform:translate(0px,0px) rotate(0deg)"><path d="M-25 -15 L12 0 L-25 15 Z" fill="#000" stroke="#00d2ff" stroke-width="2" stroke-linejoin="round"/></g>
+        </svg>
+      </div>
+      <div class="auth-info-text">
+        <div class="auth-name" id="authName">User Name</div>
+        <div class="auth-username" id="authUsername">@username</div>
+      </div>
+    </div>
+    <div class="auth-login-info">Login securely with your Telegram account to access exclusive trading tools, earn points, and build your capital.</div>
+    <label class="auth-checkbox-container">
+      <input type="checkbox" id="agreeTerms" onchange="toggleAuthBtn(this)">
+      <span>I agree to the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.</span>
+    </label>
+    <button class="auth-btn" id="authContinueBtn" onclick="enterPlatform()" disabled>Continue with Telegram</button>
+    <div class="auth-footer">Secure & Encrypted Login</div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="main-app" class="page-wrapper">
+  <header class="app-header">
+    <div class="header-left">
+      <div class="user-avatar-lg">
+        <div class="avatar-logo-container">
+          <svg class="avatar-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+            <defs>
+              <linearGradient id="cyanHead" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00d2ff"/><stop offset="40%" style="stop-color:#0099cc"/><stop offset="100%" style="stop-color:#00f0ff"/></linearGradient>
+              <linearGradient id="blueHead" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#09111f"/><stop offset="50%" style="stop-color:#000"/><stop offset="100%" style="stop-color:#070d18"/></linearGradient>
+              <clipPath id="hexClipHead"><path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z"/></clipPath>
+            </defs>
+            <path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="#000"/>
+            <g clip-path="url(#hexClipHead)">
+              <rect class="av-bar" x="65" y="110" width="18" height="50" rx="2" fill="#000" stroke="url(#cyanHead)" stroke-width="2"/>
+              <rect class="av-bar" x="91" y="85" width="18" height="75" rx="2" fill="#000" stroke="url(#cyanHead)" stroke-width="2"/>
+              <rect class="av-bar" x="117" y="60" width="18" height="100" rx="2" fill="#000" stroke="url(#cyanHead)" stroke-width="2"/>
+            </g>
+            <path class="av-hexagon-border" d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="none" stroke="url(#cyanHead)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="av-hexagon" d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="none" stroke="url(#blueHead)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="av-arrowPathRef" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="none"/>
+            <path class="av-arrow-border" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="url(#cyanHead)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="av-arrow" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <g class="av-arrow-head" style="opacity:0;transform:translate(0px,0px) rotate(0deg)"><path d="M-25 -15 L12 0 L-25 15 Z" fill="#000" stroke="#00d2ff" stroke-width="2" stroke-linejoin="round"/></g>
+          </svg>
+        </div>
+      </div>
+      <div class="user-details">
+        <h4 id="userName">User</h4>
+        <p id="userStatus">Trading Platform</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="icon-btn-lg" onclick="toggleSupportModal(true)">
+        <svg><use href="#icon-support"/></svg>
+      </div>
+      <div class="icon-btn-lg" onclick="toggleNotifModal(true)">
+        <svg><use href="#icon-bell"/></svg>
+        <span class="badge" id="notifBadge"></span>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <div id="section-home" class="section active">
+      <div class="card welcome-card">
+        <h2>Our Trading <span>Tools & Products</span></h2>
+        <p>Explore our suite of professional tools. Swipe to see details, usage, and pricing.</p>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="card stat-box"><div class="stat-value-app" id="totalPoints">10</div><div class="stat-label-app">Your Points</div></div>
+        <div class="card stat-box"><div class="stat-value-app" id="totalReferrals">0</div><div class="stat-label-app">Referrals</div></div>
+      </div>
+      
+      <div class="section-header-app"><div class="section-title-app">Tools Marketplace</div></div>
+      
+      <!-- TOOL 1 -->
+      <div class="card tool-full-card">
+        <div class="tool-header">
+          <div class="tool-icon"><svg><use href="#icon-lightning"/></svg></div>
+          <div class="tool-info">
+            <h3>Time-Based List Generator</h3>
+            <p>Generate precise real market signals</p>
+          </div>
+        </div>
+        <div class="tool-carousel">
+          <div class="tool-page">
+            <div class="tool-details">
+              <h4>Tool Overview</h4>
+              <p>We focus on actual entry times rather than just prices. Get instant, ready-to-execute time-based lists for the real market.</p>
+              <div class="img-placeholder">
+                <div class="img-placeholder-icon"><svg><use href="#icon-image"/></svg></div>
+                <div class="img-placeholder-text">📊 Tool Screenshot Preview</div>
+              </div>
+              <div class="tool-footer">
+                <div class="tool-stats">
+                  <button class="stat-item-btn like-btn" onclick="toggleLike(this)"><svg><use href="#icon-heart"/></svg><span class="like-count">1542</span></button>
+                  <div class="stat-item-btn" style="cursor:default"><svg><use href="#icon-download"/></svg><span>2540</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tool-page">
+            <div class="tool-details">
+              <h4>How to Download & Use</h4>
+              <ul class="step-list">
+                <li><span>1</span> Select purchase option or use points.</li>
+                <li><span>2</span> Connect securely to the local terminal.</li>
+                <li><span>3</span> Engine scans real market for accurate times.</li>
+                <li><span>4</span> Download or copy your list instantly.</li>
+              </ul>
+              <div class="comments-section">
+                <h5>User Reviews & Comments</h5>
+                <div class="comment-item">
+                  <div class="comment-author">@TraderX</div>
+                  <div class="comment-text">Best time-based generator. Works perfectly on real market!</div>
+                </div>
+                <div class="comment-item">
+                  <div class="comment-author">@ProDev</div>
+                  <div class="comment-text">Very accurate times, highly recommended.</div>
+                </div>
+              </div>
+              <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="switchSection('signals', document.getElementById('nav-signals'))"><svg><use href="#icon-tool"/></svg> Open Tool</button>
+            </div>
+          </div>
+          <div class="tool-page">
+            <div class="tool-details">
+              <h4>Pricing & Plans</h4>
+              <div class="pricing-mini-card">
+                <div class="plan-name">Source Code</div>
+                <div class="plan-price">$105</div>
+                <p class="plan-desc">Full Source Code Access</p>
+                <button class="btn btn-secondary" style="width:100%">Buy Source</button>
+              </div>
+              <div class="pricing-mini-card featured">
+                <div class="plan-name">Monthly Subscription</div>
+                <div class="plan-price">$5</div>
+                <p class="plan-desc">Unlimited Access No Limits</p>
+                <button class="btn btn-primary" style="width:100%">Subscribe Monthly</button>
+              </div>
+              <div class="pricing-mini-card">
+                <div class="plan-name">Weekly Subscription</div>
+                <div class="plan-price">$7</div>
+                <p class="plan-desc">Unlimited Access No Limits</p>
+                <button class="btn btn-secondary" style="width:100%">Subscribe Weekly</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dots-container"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
+      </div>
+
+      <!-- TOOL 2 -->
+      <div class="card tool-full-card">
+        <div class="tool-header">
+          <div class="tool-icon" style="background:rgba(240,165,0,.06);color:#f0a500;border-color:rgba(240,165,0,.1)"><svg><use href="#icon-code"/></svg></div>
+          <div class="tool-info"><h3>Quotex to MT4 Sync (Source Code)</h3><p>Full MQL4 & Python Source Code</p></div>
+        </div>
+        <div class="tool-carousel">
+          <div class="tool-page">
+            <div class="tool-details">
+              <h4>Product Details</h4>
+              <p>Live Quotex market data streamed directly into MT4. Real-time candle creation and synchronization.</p>
+              <ul class="feature-list-sm">
+                <li><svg><use href="#icon-check"/></svg> Full MQL4 & Python Source Code</li>
+                <li><svg><use href="#icon-check"/></svg> Fully Editable & No Encryption</li>
+                <li><svg><use href="#icon-check"/></svg> Automatic MT4 detection & validation</li>
+                <li><svg><use href="#icon-check"/></svg> Multi-asset support (Forex & OTC)</li>
+                <li><svg><use href="#icon-check"/></svg> Auto-reconnect system with recovery</li>
+              </ul>
+              <div class="img-placeholder">
+                <div class="img-placeholder-icon"><svg><use href="#icon-image"/></svg></div>
+                <div class="img-placeholder-text">💻 MT4 Dashboard & Code Preview</div>
+              </div>
+              <div class="tool-footer">
+                <div class="tool-stats">
+                  <button class="stat-item-btn like-btn" onclick="toggleLike(this)"><svg><use href="#icon-heart"/></svg><span class="like-count">89</span></button>
+                  <div class="stat-item-btn" style="cursor:default"><svg><use href="#icon-download"/></svg><span>845</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tool-page">
+            <div class="tool-details">
+              <h4>How to Download & Use</h4>
+              <ul class="step-list">
+                <li><span>1</span> Purchase the Source Code access.</li>
+                <li><span>2</span> Download the MQL4 and Python files.</li>
+                <li><span>3</span> Attach the script to your MT4 platform.</li>
+                <li><span>4</span> Stream Quotex data directly to offline charts.</li>
+              </ul>
+              <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="purchaseSourceCode()"><svg><use href="#icon-download"/></svg> Download Source</button>
+            </div>
+          </div>
+          <div class="tool-page">
+            <div class="tool-details">
+              <h4>Pricing & Plans</h4>
+              <div class="pricing-mini-card">
+                <div class="plan-name">Source Code</div>
+                <div class="plan-price">$55</div>
+                <p class="plan-desc">Full Source Code Access</p>
+                <button class="btn btn-secondary" style="width:100%">Buy Source</button>
+              </div>
+              <div class="pricing-mini-card featured">
+                <div class="plan-name">Monthly Subscription</div>
+                <div class="plan-price">$5</div>
+                <p class="plan-desc">Unlimited Access No Limits</p>
+                <button class="btn btn-primary" style="width:100%">Subscribe Monthly</button>
+              </div>
+              <div class="pricing-mini-card">
+                <div class="plan-name">Weekly Subscription</div>
+                <div class="plan-price">$2</div>
+                <p class="plan-desc">Unlimited Access No Limits</p>
+                <button class="btn btn-secondary" style="width:100%">Subscribe Weekly</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dots-container"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
+      </div>
+
+      <!-- TOOL 3 -->
+      <div class="card tool-full-card">
+        <div class="tool-header">
+          <div class="tool-icon"><svg><use href="#icon-bot"/></svg></div>
+          <div class="tool-info"><h3>Telegram Signal Bot</h3><p>Automated signal delivery bot</p></div>
+        </div>
+        <div class="tool-details">
+          <p>Automated bot to deliver signals directly to your Telegram channel or DM. (Details coming soon).</p>
+          <div class="tool-footer">
+            <div class="tool-stats">
+              <button class="stat-item-btn like-btn" onclick="toggleLike(this)"><svg><use href="#icon-heart"/></svg><span class="like-count">12</span></button>
+            </div>
+            <button class="btn btn-secondary" disabled>Coming Soon</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="section-signals" class="section">
+      <div class="tabs"><button class="tab active" onclick="switchTab('generate',this)">Generate</button><button class="tab" onclick="switchTab('history',this)">History</button></div>
+      <div id="tab-generate"><div class="card"><div class="form-group"><label class="form-label">Number of Signals</label><div class="range-container"><input type="range" class="range-slider" min="5" max="40" value="20" id="signalRange" oninput="document.getElementById('signalCount').textContent=this.value"><span class="range-value" id="signalCount">20</span></div></div><div class="form-group"><label class="form-label">Quotex Email</label><input type="email" class="form-input" id="quotexEmail" placeholder="your@email.com"></div><div class="form-group"><label class="form-label">Quotex Password</label><input type="password" class="form-input" id="quotexPassword" placeholder="Enter password"><div class="form-hint"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8"><use href="#icon-check"/></svg><span>Encrypted and sent to local terminal for read-only analysis.</span></div></div><button class="btn btn-primary" style="width:100%" onclick="generateSignals()"><svg><use href="#icon-lightning"/></svg> Generate (5 Points)</button></div></div>
+      <div id="tab-history" style="display:none"><div class="card history-item"><div class="history-info"><h4>No history yet</h4><p>Generate your first signal list</p></div></div></div>
+    </div>
+
+    <div id="section-ready" class="section">
+      <div class="section-header-app"><div class="section-title-app">Today's Ready Lists</div></div>
+      <div class="card"><div class="list-header"><div class="list-info"><h3>Morning Session</h3></div></div><div class="list-meta"><div class="list-meta-item"><svg><use href="#icon-signals"/></svg><span>20 Time Signals</span></div></div><div class="list-actions"><button class="btn btn-primary" onclick="purchaseReadyList(1.00)"><svg><use href="#icon-tool"/></svg>$1.00</button><button class="btn btn-secondary" onclick="unlockWithReferrals()">2 Refs</button></div></div>
+    </div>
+
+    <div id="section-missions" class="section">
+      <div class="missions-locked-page">
+        <div class="missions-lock-wrapper">
+          <div class="missions-lock-icon">
+            <svg><use href="#icon-lock"/></svg>
+          </div>
+        </div>
+        <h2 class="missions-locked-title">Coming Soon</h2>
+        <p class="missions-locked-sub">Daily missions are being prepared. Check back soon to start earning bonus points!</p>
+        <div class="missions-blurred-preview">
+          <div class="blurred-mission-item">
+            <div class="blurred-check"></div>
+            <div class="blurred-lines">
+              <div class="blurred-line"></div>
+              <div class="blurred-line short"></div>
+            </div>
+            <div class="blurred-reward"></div>
+          </div>
+          <div class="blurred-mission-item">
+            <div class="blurred-check"></div>
+            <div class="blurred-lines">
+              <div class="blurred-line"></div>
+              <div class="blurred-line short"></div>
+            </div>
+            <div class="blurred-reward"></div>
+          </div>
+          <div class="blurred-mission-item">
+            <div class="blurred-check"></div>
+            <div class="blurred-lines">
+              <div class="blurred-line"></div>
+              <div class="blurred-line short"></div>
+            </div>
+            <div class="blurred-reward"></div>
+          </div>
+          <div class="blurred-mission-item">
+            <div class="blurred-check"></div>
+            <div class="blurred-lines">
+              <div class="blurred-line"></div>
+              <div class="blurred-line short"></div>
+            </div>
+            <div class="blurred-reward"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="section-profile" class="section">
+      <div class="card profile-header">
+        <div class="profile-top">
+          <div class="profile-left">
+            <div class="profile-avatar-xl" style="width:60px;height:60px;margin:0">
+              <div class="avatar-logo-container">
+                <svg class="avatar-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+                  <defs>
+                    <linearGradient id="cyanProf" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00d2ff"/><stop offset="40%" style="stop-color:#0099cc"/><stop offset="100%" style="stop-color:#00f0ff"/></linearGradient>
+                    <linearGradient id="blueProf" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#09111f"/><stop offset="50%" style="stop-color:#000"/><stop offset="100%" style="stop-color:#070d18"/></linearGradient>
+                    <clipPath id="hexClipProf"><path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z"/></clipPath>
+                  </defs>
+                  <path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="#000"/>
+                  <g clip-path="url(#hexClipProf)">
+                    <rect class="av-bar" x="65" y="110" width="18" height="50" rx="2" fill="#000" stroke="url(#cyanProf)" stroke-width="2"/>
+                    <rect class="av-bar" x="91" y="85" width="18" height="75" rx="2" fill="#000" stroke="url(#cyanProf)" stroke-width="2"/>
+                    <rect class="av-bar" x="117" y="60" width="18" height="100" rx="2" fill="#000" stroke="url(#cyanProf)" stroke-width="2"/>
+                  </g>
+                  <path class="av-hexagon-border" d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="none" stroke="url(#cyanProf)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path class="av-hexagon" d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="none" stroke="url(#blueProf)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path class="av-arrowPathRef" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="none"/>
+                  <path class="av-arrow-border" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="url(#cyanProf)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path class="av-arrow" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <g class="av-arrow-head" style="opacity:0;transform:translate(0px,0px) rotate(0deg)"><path d="M-25 -15 L12 0 L-25 15 Z" fill="#000" stroke="#00d2ff" stroke-width="2" stroke-linejoin="round"/></g>
+                </svg>
+              </div>
+            </div>
+            <div class="profile-name-sm" id="profileName">User Name</div>
+          </div>
+          <div class="profile-right">
+            <div class="profile-info-row"><span class="profile-info-label">User ID</span><span class="profile-info-value" id="profileId">ID: 00000000</span></div>
+            <div class="profile-info-row"><span class="profile-info-label">Registration Date</span><span class="profile-info-value">2024-01-15</span></div>
+            <div class="profile-info-row"><span class="profile-info-label">Total Referrals</span><span class="profile-info-value" id="profileRefs">0</span></div>
+            <div class="level-box">
+              <div class="level-header">
+                <span class="level-name-sm">
+                  <svg viewBox="0 0 24 24"><use href="#icon-rocket"/></svg>
+                  Level 2 - Pro
+                </span>
+                <span class="level-xp">120 / 300 XP</span>
+              </div>
+              <div class="level-progress">
+                <div class="level-fill" style="width:40%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="balance-cards">
+        <div class="card balance-card"><div class="balance-amount" id="balancePoints">10</div><div class="balance-label">Points</div></div>
+        <div class="card balance-card" onclick="openWalletModal()"><div class="balance-amount cash" id="balanceCash">0.00$</div><div class="balance-label">Earnings</div></div>
+        <div class="card balance-card"><div class="balance-amount" id="balanceDays">0</div><div class="balance-label">Free Days</div></div>
+      </div>
+
+      <div class="card referral-card-enhanced">
+        <h3><svg viewBox="0 0 24 24" style="width:18px;height:18px;color:#00d2ff;fill:none;stroke:currentColor;stroke-width:1.8"><use href="#icon-users"/></svg>Referral & Capital Building</h3>
+        <div class="referral-options">
+          <div class="ref-option">
+            <div class="ref-icon"><svg viewBox="0 0 24 24"><use href="#icon-users"/></svg></div>
+            <div class="ref-text">
+              <h4>Just a Referral (Signup)</h4>
+              <p>You earn <strong>5 Points</strong> immediately when someone signs up using your link.</p>
+            </div>
+          </div>
+          <div class="ref-option">
+            <div class="ref-icon" style="background:rgba(240,165,0,.1);color:#f0a500"><svg viewBox="0 0 24 24"><use href="#icon-trend-up"/></svg></div>
+            <div class="ref-text">
+              <h4>Referral Subscription</h4>
+              <p>If your referral subscribes to any paid plan, you earn <strong>30% Cash Commission</strong> + 25 Bonus Points + 3 Free Days.</p>
+            </div>
+          </div>
+        </div>
+        <div class="ref-link-container">
+          <input type="text" value="https://qx.com/ref/XXXX" id="refLink" readonly>
+          <button class="copy-btn" onclick="copyRefLink()"><svg viewBox="0 0 24 24"><use href="#icon-copy"/></svg></button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size:14px;font-weight:700;color:#fff;margin-bottom:10px">Monthly Access - $5.00</h3>
+        <ul style="list-style:none;margin-bottom:14px">
+          <li style="padding:4px 0;font-size:11px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:12px;height:12px;color:#00d2ff;fill:none;stroke:currentColor;stroke-width:1.8"><use href="#icon-check"/></svg>120 Points monthly</li>
+          <li style="padding:4px 0;font-size:11px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:12px;height:12px;color:#00d2ff;fill:none;stroke:currentColor;stroke-width:1.8"><use href="#icon-check"/></svg>All ready lists FREE</li>
+          <li style="padding:4px 0;font-size:11px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:6px"><svg viewBox="0 0 24 24" style="width:12px;height:12px;color:#00d2ff;fill:none;stroke:currentColor;stroke-width:1.8"><use href="#icon-check"/></svg>30% commission</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%" onclick="subscribeMonthly()">Subscribe Now</button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <div class="nav-item active" onclick="switchSection('home',this)" id="nav-home">
+      <svg class="nav-icon"><use href="#icon-home"/></svg>
+      <span class="nav-label">Home</span>
+    </div>
+    <div class="nav-item" onclick="switchSection('signals',this)" id="nav-signals">
+      <svg class="nav-icon"><use href="#icon-signals"/></svg>
+      <span class="nav-label">Signals</span>
+      <span class="nav-badge" id="badge-signals">2</span>
+    </div>
+    <div class="nav-item" onclick="switchSection('ready',this)" id="nav-ready">
+      <svg class="nav-icon"><use href="#icon-list"/></svg>
+      <span class="nav-label">Ready</span>
+      <span class="nav-badge" id="badge-ready">1</span>
+    </div>
+    <div class="nav-item" onclick="switchSection('missions',this)" id="nav-missions">
+      <svg class="nav-icon"><use href="#icon-trophy"/></svg>
+      <span class="nav-label">Missions</span>
+      <span class="nav-badge" id="badge-missions">4</span>
+    </div>
+    <div class="nav-item" onclick="switchSection('profile',this)" id="nav-profile">
+      <svg class="nav-icon"><use href="#icon-profile"/></svg>
+      <span class="nav-label">Profile</span>
+      <span class="nav-badge" id="badge-profile">5</span>
+    </div>
+  </nav>
+</div>
+
+<!-- NOTIFICATIONS MODAL -->
+<div class="modal-overlay" id="notifOverlay" onclick="toggleNotifModal(false)"></div>
+<div class="modal-sheet" id="notifSheet">
+  <div class="modal-header">
+    <div class="modal-title">Notifications</div>
+    <button class="modal-close" onclick="toggleNotifModal(false)">&times;</button>
+  </div>
+  <div class="notif-item">
+    <div class="notif-icon"><svg><use href="#icon-users"/></svg></div>
+    <div class="notif-content">
+      <h5>New Referral Signup!</h5>
+      <p>@trader_pro just signed up using your link. You earned 5 points.</p>
+      <span class="notif-time">2 mins ago</span>
+    </div>
+  </div>
+  <div class="notif-item">
+    <div class="notif-icon"><svg><use href="#icon-gift"/></svg></div>
+    <div class="notif-content">
+      <h5>Level Up Reward!</h5>
+      <p>You reached Level 2 - Pro. Enjoy 10% discount on ready lists.</p>
+      <span class="notif-time">1 hour ago</span>
+    </div>
+  </div>
+  <div class="notif-item">
+    <div class="notif-icon"><svg><use href="#icon-bell"/></svg></div>
+    <div class="notif-content">
+      <h5>Platform Update</h5>
+      <p>New tool added: Quotex to MT4 Sync. Check it out in the marketplace!</p>
+      <span class="notif-time">Yesterday</span>
+    </div>
+  </div>
+</div>
+
+<!-- WALLET MODAL -->
+<div class="modal-overlay" id="walletOverlay" onclick="closeWalletModal()"></div>
+<div class="modal-sheet" id="walletSheet">
+  <div class="modal-header">
+    <div class="modal-title">
+      <svg><use href="#icon-wallet"/></svg>
+      Wallet
+    </div>
+    <button class="modal-close" onclick="closeWalletModal()">&times;</button>
+  </div>
+  <div class="wallet-balance-card">
+    <div class="wallet-balance-label">Available Balance</div>
+    <div class="wallet-balance-value"><span>$</span><span id="walletBalance">0.00</span></div>
+    <div class="wallet-balance-sub">Earnings from referrals & commissions</div>
+  </div>
+  <div class="wallet-actions">
+    <button class="wallet-action-btn wallet-deposit-btn" onclick="switchWalletTab('deposit')">
+      <svg><use href="#icon-arrow-down"/></svg> Deposit
+    </button>
+    <button class="wallet-action-btn wallet-withdraw-btn" onclick="switchWalletTab('withdraw')">
+      <svg><use href="#icon-arrow-up"/></svg> Withdraw
+    </button>
+  </div>
+  <div class="wallet-tabs">
+    <button class="wallet-tab active" data-tab="deposit" onclick="switchWalletTab('deposit',this)">Deposit</button>
+    <button class="wallet-tab" data-tab="withdraw" onclick="switchWalletTab('withdraw',this)">Withdraw</button>
+    <button class="wallet-tab" data-tab="history" onclick="switchWalletTab('history',this)">History</button>
+  </div>
+  <div class="wallet-panel active" id="wallet-deposit">
+    <div class="method-card selected" onclick="selectMethod(this)">
+      <div class="method-head">
+        <div class="method-icon binance"><svg><use href="#icon-binance"/></svg></div>
+        <div>
+          <div class="method-name">Binance Pay ID</div>
+          <div class="method-desc">Instant deposit via Binance Pay</div>
+        </div>
+        <div class="method-fee">0% Fee</div>
+      </div>
+    </div>
+    <div class="method-card" onclick="selectMethod(this)">
+      <div class="method-head">
+        <div class="method-icon usdt"><svg><use href="#icon-usdt"/></svg></div>
+        <div>
+          <div class="method-name">USDT – TRC20</div>
+          <div class="method-desc">Tether on TRON network</div>
+        </div>
+        <div class="method-fee">1% Fee</div>
+      </div>
+    </div>
+    <div class="wallet-form-group">
+      <label class="wallet-form-label">Amount (USD)</label>
+      <input type="number" class="wallet-form-input" placeholder="Enter amount" min="1" step="0.01">
+    </div>
+    <button class="btn btn-primary" style="width:100%" onclick="processDeposit()">
+      <svg><use href="#icon-arrow-down"/></svg> Confirm Deposit
+    </button>
+  </div>
+  <div class="wallet-panel" id="wallet-withdraw">
+    <div class="method-card selected" onclick="selectMethod(this)">
+      <div class="method-head">
+        <div class="method-icon binance"><svg><use href="#icon-binance"/></svg></div>
+        <div>
+          <div class="method-name">Binance Pay ID</div>
+          <div class="method-desc">Fast withdrawal to Binance</div>
+        </div>
+        <div class="method-fee">0% Fee</div>
+      </div>
+    </div>
+    <div class="method-card" onclick="selectMethod(this)">
+      <div class="method-head">
+        <div class="method-icon usdt"><svg><use href="#icon-usdt"/></svg></div>
+        <div>
+          <div class="method-name">USDT – TRC20</div>
+          <div class="method-desc">Withdraw to TRC20 wallet</div>
+        </div>
+        <div class="method-fee">1% Fee</div>
+      </div>
+    </div>
+    <div class="wallet-form-group">
+      <label class="wallet-form-label">Wallet Address / Pay ID</label>
+      <input type="text" class="wallet-form-input" placeholder="Enter your wallet address">
+    </div>
+    <div class="wallet-form-group">
+      <label class="wallet-form-label">Amount (USD)</label>
+      <input type="number" class="wallet-form-input" placeholder="Min. $5.00" min="5" step="0.01">
+    </div>
+    <button class="btn btn-primary" style="width:100%;background:linear-gradient(135deg,#ff4d6d,#c9184a)" onclick="processWithdraw()">
+      <svg><use href="#icon-arrow-up"/></svg> Request Withdrawal
+    </button>
+  </div>
+  <div class="wallet-panel" id="wallet-history">
+    <div class="tx-list">
+      <div class="tx-item">
+        <div class="tx-icon deposit"><svg><use href="#icon-arrow-down"/></svg></div>
+        <div class="tx-info">
+          <div class="tx-title">Referral Commission</div>
+          <div class="tx-date">2026-08-19 14:32</div>
+          <span class="tx-status completed">Completed</span>
+        </div>
+        <div class="tx-amount deposit">+2.50$</div>
+      </div>
+      <div class="tx-item">
+        <div class="tx-icon withdraw"><svg><use href="#icon-arrow-up"/></svg></div>
+        <div class="tx-info">
+          <div class="tx-title">Withdraw to Binance</div>
+          <div class="tx-date">2026-08-18 09:15</div>
+          <span class="tx-status completed">Completed</span>
+        </div>
+        <div class="tx-amount withdraw">-10.00$</div>
+      </div>
+      <div class="tx-item">
+        <div class="tx-icon deposit"><svg><use href="#icon-arrow-down"/></svg></div>
+        <div class="tx-info">
+          <div class="tx-title">Referral Signup Bonus</div>
+          <div class="tx-date">2026-08-17 18:45</div>
+          <span class="tx-status completed">Completed</span>
+        </div>
+        <div class="tx-amount deposit">+1.50$</div>
+      </div>
+      <div class="tx-item">
+        <div class="tx-icon withdraw"><svg><use href="#icon-arrow-up"/></svg></div>
+        <div class="tx-info">
+          <div class="tx-title">Withdraw USDT TRC20</div>
+          <div class="tx-date">2026-08-15 11:20</div>
+          <span class="tx-status pending">Pending</span>
+        </div>
+        <div class="tx-amount withdraw">-25.00$</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUPPORT MODAL -->
+<div class="modal-overlay" id="supportOverlay" onclick="toggleSupportModal(false)"></div>
+<div class="modal-sheet" id="supportSheet">
+  <div class="modal-header">
+    <div class="modal-title">Customer Support</div>
+    <button class="modal-close" onclick="toggleSupportModal(false)">&times;</button>
+  </div>
+  <div style="text-align:center;padding:20px 0">
+    <div class="avatar-logo-container" style="width:80px;height:80px;margin:0 auto 16px">
+      <svg class="avatar-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+        <defs>
+          <linearGradient id="cyanSupp" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00d2ff"/><stop offset="40%" style="stop-color:#0099cc"/><stop offset="100%" style="stop-color:#00f0ff"/></linearGradient>
+          <linearGradient id="blueSupp" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#09111f"/><stop offset="50%" style="stop-color:#000"/><stop offset="100%" style="stop-color:#070d18"/></linearGradient>
+          <clipPath id="hexClipSupp"><path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z"/></clipPath>
+        </defs>
+        <path d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="#000"/>
+        <g clip-path="url(#hexClipSupp)">
+          <rect class="av-bar" x="65" y="110" width="18" height="50" rx="2" fill="#000" stroke="url(#cyanSupp)" stroke-width="2"/>
+          <rect class="av-bar" x="91" y="85" width="18" height="75" rx="2" fill="#000" stroke="url(#cyanSupp)" stroke-width="2"/>
+          <rect class="av-bar" x="117" y="60" width="18" height="100" rx="2" fill="#000" stroke="url(#cyanSupp)" stroke-width="2"/>
+        </g>
+        <path class="av-hexagon-border" d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="none" stroke="url(#cyanSupp)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="av-hexagon" d="M100 15 L160 50 L160 120 L100 155 L40 120 L40 50 Z" fill="none" stroke="url(#blueSupp)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="av-arrowPathRef" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="none"/>
+        <path class="av-arrow-border" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="url(#cyanSupp)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="av-arrow" d="M35 125 L75 90 L100 105 L165 45" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <g class="av-arrow-head" style="opacity:0;transform:translate(0px,0px) rotate(0deg)"><path d="M-25 -15 L12 0 L-25 15 Z" fill="#000" stroke="#00d2ff" stroke-width="2" stroke-linejoin="round"/></g>
+      </svg>
+    </div>
+    <h3 style="font-size:16px;font-weight:800;color:#fff;margin-bottom:8px">QXTerminal Support</h3>
+    <p style="font-size:12px;color:rgba(255,255,255,.6);margin-bottom:24px;line-height:1.5">If you face any issues or have questions, please contact our support team on Telegram. We are available 24/7 to help you.</p>
+    <a href="#" class="btn btn-primary" style="width:100%;text-decoration:none">
+      <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor"><use href="#icon-telegram"/></svg>
+      Contact Support on Telegram
+    </a>
+    <p style="font-size:11px;color:rgba(255,255,255,.3);margin-top:12px">@QXTerminal_Support</p>
+  </div>
+</div>
+
+<script>
+let userData={id:'',username:'',firstName:'',points:10,cashEarnings:0,freeDays:0,referrals:0,referralCode:'',history:[]};
+const tg=window.Telegram.WebApp;
+if(tg)tg.expand();
+
+const badgesState = {
+  signals: 2,
+  ready: 1,
+  missions: 4,
+  profile: 5
+};
+
+function updateBadge(sectionName){
+  const badge = document.getElementById('badge-' + sectionName);
+  if(badge){
+    badge.classList.add('hidden');
+  }
+}
+
+var pathRef=document.getElementById('arrowPathRef'),pathLine=document.querySelector('.arrow'),pathBorder=document.querySelector('.arrow-border'),arrowHeadGroup=document.getElementById('arrowHeadGroup');
+function startArrow(){
+  if(!pathRef||!pathLine||!pathBorder||!arrowHeadGroup)return;
+  var len=pathRef.getTotalLength();
+  [pathLine,pathBorder].forEach(function(p){p.style.strokeDasharray=len;p.style.strokeDashoffset=len});
+  arrowHeadGroup.style.opacity='0';arrowHeadGroup.style.transform='translate(0px,0px) rotate(0deg)';
+  var dur=2000,startT=performance.now()+500;
+  function tick(now){
+    var elapsed=now-startT;if(elapsed<0){requestAnimationFrame(tick);return}
+    var raw=Math.min(elapsed/dur,1),prog=1-Math.pow(1-raw,3),curLen=len*prog;
+    pathLine.style.strokeDashoffset=len-curLen;pathBorder.style.strokeDashoffset=len-curLen;
+    if(prog>=.95){var p1=pathRef.getPointAtLength(Math.max(0,curLen-4)),p2=pathRef.getPointAtLength(Math.min(len,curLen+4));var ang=Math.atan2(p2.y-p1.y,p2.x-p1.x)*(180/Math.PI),ep=pathRef.getPointAtLength(curLen);arrowHeadGroup.style.transform='translate('+ep.x+'px,'+ep.y+'px) rotate('+ang+'deg)';arrowHeadGroup.style.opacity=Math.min(1,(prog-.95)*20)}
+    if(raw<1)requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+startArrow();
+
+function animateAvatar(svg) {
+    const pathRef = svg.querySelector('.av-arrowPathRef');
+    const pathLine = svg.querySelector('.av-arrow');
+    const pathBorder = svg.querySelector('.av-arrow-border');
+    const arrowHead = svg.querySelector('.av-arrow-head');
+    const hexB = svg.querySelector('.av-hexagon-border');
+    const hexI = svg.querySelector('.av-hexagon');
+    const bars = svg.querySelectorAll('.av-bar');
+    if(!pathRef || !pathLine || !pathBorder || !arrowHead || !hexB) return;
+    const len = pathRef.getTotalLength();
+    const hexLen = hexB.getTotalLength();
+    const cycleDuration = 10000; 
+    let startTime = performance.now();
+    function tick(now) {
+        let elapsed = now - startTime;
+        if (elapsed > cycleDuration) { startTime = now; elapsed = 0; }
+        let hexOff = hexLen, arrowOff = len, headX = 0, headY = 0, headAng = 0, headOp = 0, svgOp = 1;
+        if (elapsed < 1500) { let raw = elapsed / 1500; let prog = 1 - Math.pow(1 - raw, 3); hexOff = hexLen * (1 - prog); } else { hexOff = 0; }
+        bars.forEach((bar, i) => {
+            let delay = 500 + i * 200; let barDur = 1000;
+            if (elapsed > delay) {
+                let barElapsed = elapsed - delay;
+                if (barElapsed < barDur) { let raw = barElapsed / barDur; let prog = 1 - Math.pow(1 - raw, 3); bar.style.transform = `scaleY(${prog})`; bar.style.opacity = prog; } 
+                else { bar.style.transform = `scaleY(1)`; bar.style.opacity = 1; }
+            } else { bar.style.transform = `scaleY(0)`; bar.style.opacity = 0; }
+        });
+        let arrowStart = 500; let arrowDur = 2000;
+        if (elapsed > arrowStart) {
+            let arrowElapsed = elapsed - arrowStart;
+            if (arrowElapsed < arrowDur) {
+                let raw = arrowElapsed / arrowDur; let prog = 1 - Math.pow(1 - raw, 3);
+                let curLen = len * prog; arrowOff = len - curLen;
+                if (prog >= 0.95) {
+                    let p1 = pathRef.getPointAtLength(Math.max(0, curLen - 4));
+                    let p2 = pathRef.getPointAtLength(Math.min(len, curLen + 4));
+                    let ang = Math.atan2(p2.y - p1.y, p2.x - p1.x) * (180 / Math.PI);
+                    let ep = pathRef.getPointAtLength(curLen);
+                    headX = ep.x; headY = ep.y; headAng = ang; headOp = Math.min(1, (prog - 0.95) * 20);
+                }
+            } else {
+                arrowOff = 0;
+                let ep = pathRef.getPointAtLength(len); let p1 = pathRef.getPointAtLength(Math.max(0, len - 4)); let p2 = pathRef.getPointAtLength(Math.min(len, len + 4));
+                let ang = Math.atan2(p2.y - p1.y, p2.x - p1.x) * (180 / Math.PI);
+                headX = ep.x; headY = ep.y; headAng = ang; headOp = 1;
+            }
+        }
+        if (elapsed > 8000) { let fadeRaw = (elapsed - 8000) / 2000; svgOp = 1 - fadeRaw; }
+        hexB.style.strokeDasharray = hexLen; hexB.style.strokeDashoffset = hexOff;
+        hexI.style.strokeDasharray = hexLen; hexI.style.strokeDashoffset = hexOff;
+        pathLine.style.strokeDasharray = len; pathLine.style.strokeDashoffset = arrowOff;
+        pathBorder.style.strokeDasharray = len; pathBorder.style.strokeDashoffset = arrowOff;
+        arrowHead.style.transform = `translate(${headX}px, ${headY}px) rotate(${headAng}deg)`;
+        arrowHead.style.opacity = headOp; svg.style.opacity = svgOp;
+        requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+}
+
+function startAvatarLoops() { const avatars = document.querySelectorAll('.avatar-logo-svg'); avatars.forEach(svg => animateAvatar(svg)); }
+
+setTimeout(function(){
+  document.getElementById('logo-stage').classList.add('to-bg');
+  setTimeout(function(){ document.getElementById('landing-page').classList.add('visible'); startAvatarLoops(); },1500);
+}, 4500);
+
+function enterApp(){
+  document.getElementById('landing-page').classList.remove('visible');
+  setTimeout(function(){
+    document.getElementById('auth-page').classList.add('visible');
+    if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user){
+      const u=tg.initDataUnsafe.user;
+      userData.id=u.id.toString(); userData.username=u.username||'user_'+u.id; userData.firstName=u.first_name;
+      userData.referralCode='QX'+u.id.toString().slice(-6).toUpperCase();
+      document.getElementById('authName').textContent=u.first_name+' '+(u.last_name||'');
+      document.getElementById('authUsername').textContent='@'+(u.username||'user_'+u.id);
+      document.getElementById('userName').textContent=u.first_name;
+      document.getElementById('profileName').textContent=u.first_name+' '+(u.last_name||'');
+      document.getElementById('profileId').textContent='ID: '+userData.id;
+      document.getElementById('refLink').value='https://qx.com/ref/'+userData.referralCode;
+    }
+  },800);
+}
+
+function toggleAuthBtn(checkbox) {
+  const btn = document.getElementById('authContinueBtn');
+  btn.disabled = !checkbox.checked;
+}
+
+function enterPlatform(){
+  document.getElementById('auth-page').classList.remove('visible');
+  setTimeout(function(){
+    document.getElementById('main-app').classList.add('visible');
+    if(tg)tg.ready(); updateUI(); initCarousels(); 
+  },800);
+}
+
+function switchSection(sectionName,navEl){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('section-'+sectionName).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const activeNav=document.getElementById('nav-'+sectionName);
+  if(activeNav) activeNav.classList.add('active');
+  updateBadge(sectionName);
+  if(tg&&tg.HapticFeedback)tg.HapticFeedback.impactOccurred('light');
+}
+
+function switchTab(tabName,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  if(tabName==='generate'){ document.getElementById('tab-generate').style.display='block'; document.getElementById('tab-history').style.display='none'; } 
+  else { document.getElementById('tab-generate').style.display='none'; document.getElementById('tab-history').style.display='block'; }
+}
+
+function generateSignals(){
+  if(userData.points<5){alert('Insufficient points!');return}
+  userData.points-=5;
+  const btn=event.currentTarget; const originalHTML=btn.innerHTML;
+  btn.innerHTML='Generating...'; btn.disabled=true;
+  setTimeout(()=>{ btn.innerHTML=originalHTML; btn.disabled=false;
+    if(tg&&tg.HapticFeedback)tg.HapticFeedback.notificationOccurred('success');
+    alert('Generated 20 signals! -5 points'); updateUI();
+  },2000);
+}
+
+function purchaseReadyList(price){alert('Payment Gateway: $'+price)}
+function unlockWithReferrals(){if(userData.referrals>=2){alert('List unlocked!')}else{alert('You need 2 active referrals. Current: '+userData.referrals)}}
+function purchaseSourceCode(){alert('Source Code Download')}
+function copyRefLink(){ const link=document.getElementById('refLink').value; navigator.clipboard.writeText(link); if(tg&&tg.HapticFeedback)tg.HapticFeedback.notificationOccurred('success'); }
+function subscribeMonthly(){ alert('Monthly Subscription - $5.00'); userData.points+=120; updateUI(); }
+
+function updateUI(){
+  document.getElementById('totalPoints').textContent=userData.points;
+  document.getElementById('balancePoints').textContent=userData.points;
+  document.getElementById('totalReferrals').textContent=userData.referrals;
+  document.getElementById('profileRefs').textContent=userData.referrals;
+  document.getElementById('balanceCash').textContent=userData.cashEarnings.toFixed(2)+'$';
+  document.getElementById('balanceDays').textContent=userData.freeDays;
+}
+
+function toggleLike(btn) {
+  const countSpan = btn.querySelector('.like-count');
+  let count = parseInt(countSpan.textContent);
+  if (btn.classList.contains('active')) { btn.classList.remove('active'); count -= 1; countSpan.textContent = count; } 
+  else { btn.classList.add('active'); count += 1; countSpan.textContent = count; if(tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light'); }
+}
+
+function toggleNotifModal(show) {
+  document.getElementById('notifOverlay').classList.toggle('visible', show);
+  document.getElementById('notifSheet').classList.toggle('visible', show);
+  if(show && tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+}
+
+function toggleSupportModal(show) {
+  document.getElementById('supportOverlay').classList.toggle('visible', show);
+  document.getElementById('supportSheet').classList.toggle('visible', show);
+  if(show && tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+}
+
+function initCarousels() {
+  const carousels = document.querySelectorAll('.tool-carousel');
+  carousels.forEach(carousel => {
+    const dotsContainer = carousel.parentElement.querySelector('.dots-container');
+    if (!dotsContainer) return;
+    const dots = dotsContainer.querySelectorAll('.dot');
+    carousel.scrollLeft = 0; 
+    carousel.addEventListener('scroll', () => {
+      const pageWidth = carousel.offsetWidth;
+      if (pageWidth === 0) return;
+      const activeIndex = Math.round(carousel.scrollLeft / pageWidth);
+      dots.forEach((dot, index) => { if (index === activeIndex) dot.classList.add('active'); else dot.classList.remove('active'); });
+    });
+  });
+}
+
+function openWalletModal(){
+  document.getElementById('walletOverlay').classList.add('visible');
+  document.getElementById('walletSheet').classList.add('visible');
+  document.getElementById('walletBalance').textContent = userData.cashEarnings.toFixed(2);
+  if(tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+}
+
+function closeWalletModal(){
+  document.getElementById('walletOverlay').classList.remove('visible');
+  document.getElementById('walletSheet').classList.remove('visible');
+}
+
+function switchWalletTab(tabName, btn){
+  document.querySelectorAll('.wallet-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('wallet-' + tabName).classList.add('active');
+  if(btn){
+    document.querySelectorAll('.wallet-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+  } else {
+    const tabs = document.querySelectorAll('.wallet-tab');
+    tabs.forEach(t => {
+      t.classList.remove('active');
+      if(t.dataset.tab === tabName) t.classList.add('active');
+    });
+  }
+}
+
+function selectMethod(card){
+  const parent = card.parentElement;
+  parent.querySelectorAll('.method-card').forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+  if(tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+}
+
+function processDeposit(){
+  alert('Deposit request submitted. You will receive payment instructions via Telegram.');
+  closeWalletModal();
+}
+
+function processWithdraw(){
+  if(userData.cashEarnings < 5){
+    alert('Minimum withdrawal amount is $5.00');
+    return;
+  }
+  alert('Withdrawal request submitted. Processing time: 1-24 hours.');
+  closeWalletModal();
+}
+</script>
 </body>
 </html>
