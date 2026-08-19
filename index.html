@@ -393,8 +393,28 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .nav-icon{width:20px;height:20px;color:#fff;transition:all .3s;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .nav-label{font-size:9px;font-weight:600;color:rgba(255,255,255,.5)}
 
-.nav-badge{position:absolute;top:-2px;right:calc(50% - 16px);min-width:16px;height:16px;padding:0 4px;background:#ff4d6d;border-radius:10px;color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #05070b;font-family:'JetBrains Mono',monospace;box-shadow:0 0 8px rgba(255,77,109,.5);animation:badgePulse 2s ease-in-out infinite}
-@keyframes badgePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+/* NAV BADGE - لون أحمر ساطع وواضح بدون glow */
+.nav-badge{
+  position:absolute;
+  top:-4px;
+  right:calc(50% - 18px);
+  min-width:18px;
+  height:18px;
+  padding:0 5px;
+  background:#ff1744;
+  border-radius:10px;
+  color:#fff;
+  font-size:10px;
+  font-weight:800;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid #05070b;
+  font-family:'JetBrains Mono',monospace;
+  letter-spacing:-.3px;
+  animation:badgePulse 2.5s ease-in-out infinite;
+}
+@keyframes badgePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 .nav-badge.hidden{display:none}
 
 @media(max-width:900px){
@@ -405,21 +425,34 @@ body{font-family:'Montserrat',Arial,sans-serif}
   .floating-stats{gap:20px}
 }
 
+/* MOBILE - رفع الإحصائيات للأعلى */
 @media (max-width:600px){
-  .hero{min-height:calc(100vh - 56px);padding:70px 18px 20px}
-  .hero-top{padding-top:10px}
-  .hero-badge{font-size:9px;padding:5px 10px;margin-bottom:16px}
-  .hero h1{font-size:clamp(26px,8vw,32px);line-height:1.12;letter-spacing:-0.7px;margin-bottom:14px;max-width:350px}
+  .hero{
+    min-height:calc(100vh - 56px);
+    padding:70px 18px 20px;
+    /* استخدام space-between لضمان ظهور الإحصائيات */
+    justify-content:space-between;
+  }
+  .hero-top{
+    padding-top:0;
+    flex:0 0 auto;
+    justify-content:flex-start;
+  }
+  .hero-badge{font-size:9px;padding:5px 10px;margin-bottom:14px}
+  .hero h1{font-size:clamp(26px,8vw,32px);line-height:1.12;letter-spacing:-0.7px;margin-bottom:12px;max-width:350px}
   .hero h1 span{display:inline}
-  .hero-sub{font-size:12px;line-height:1.9;max-width:340px;margin-bottom:24px}
+  .hero-sub{font-size:12px;line-height:1.9;max-width:340px;margin-bottom:20px}
   .hero-actions{flex-direction:row;gap:10px;align-items:center;justify-content:center;width:auto;margin-top:14px}
   .hero-btn{width:auto;min-width:auto;flex:none;padding:10px 20px;font-size:12px}
-  /* رفع الإحصائيات للأعلى */
+  
+  /* رفع الإحصائيات بشكل واضح */
   .floating-stats{
     gap:8px;
     padding:0 12px;
-    margin-top:20px !important;
+    margin-top:18px !important;
+    padding-top:0 !important;
     flex-wrap:nowrap;
+    flex:0 0 auto;
   }
   .stat-item-float{padding:10px 8px;min-width:0;flex:1}
   .stat-number-float{font-size:13px}
@@ -436,6 +469,16 @@ body{font-family:'Montserrat',Arial,sans-serif}
   .missions-lock-icon svg{width:44px;height:44px}
   .missions-locked-title{font-size:20px}
   .method-icon{width:38px;height:38px}
+  
+  /* Badge على الموبايل */
+  .nav-badge{
+    top:-5px;
+    right:calc(50% - 18px);
+    min-width:17px;
+    height:17px;
+    font-size:9px;
+    padding:0 4px;
+  }
 }
 
 @media (min-width:901px){
@@ -483,7 +526,6 @@ body{font-family:'Montserrat',Arial,sans-serif}
     <symbol id="icon-gem" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></symbol>
     <symbol id="icon-crown" viewBox="0 0 24 24"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7z"/></symbol>
 
-    <!-- USDT OFFICIAL LOGO -->
     <symbol id="icon-usdt" viewBox="0 0 256 256">
       <circle cx="128" cy="128" r="128" fill="#26A17B"/>
       <path fill="#fff" d="M142.7 139.2v-.1c-.8.1-4.9.3-14.1.3-7.3 0-12.5-.2-14.3-.3v.1c-36.4-1.6-63.6-7.9-63.6-15.4s27.2-13.8 63.6-15.4v24.5c1.8.1 7.1.5 14.4.5 9 0 13.2-.4 14-.5v-24.5c36.3 1.6 63.4 7.9 63.4 15.4s-27.1 13.8-63.4 15.4zm0-33.3V96h48.6V72H64.8v24h48.5v9.9c-39.4 1.8-69 9.6-69 21.4s29.6 19.6 69 21.4v31.8h29.4v-31.8c39.3-1.8 68.8-9.6 68.8-21.4s-29.5-19.6-68.8-21.4z"/>
