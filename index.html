@@ -11,7 +11,6 @@
 html,body{width:100%;height:100%;background:#000;overflow:hidden;touch-action:manipulation;-webkit-text-size-adjust:100%}
 body{font-family:'Montserrat',Arial,sans-serif}
 
-/* LOGO STAGE */
 #logo-stage{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;z-index:10000;transition:z-index 0s 1.5s, background 1.5s ease;background:#000}
 .logo-container{width:300px;height:300px;position:relative;margin:auto;transition:transform 2.5s cubic-bezier(.25,.1,.25,1),opacity 2.5s ease;transform-origin:center 45%}
 .logo-container svg{width:100%;height:100%;overflow:visible;display:block}
@@ -27,7 +26,6 @@ body{font-family:'Montserrat',Arial,sans-serif}
 @keyframes drawHex{from{stroke-dasharray:1000;stroke-dashoffset:1000}to{stroke-dashoffset:0}}
 @keyframes growBar{from{transform:scaleY(0);transform-origin:bottom;opacity:0}to{transform:scaleY(1);transform-origin:bottom;opacity:1}}
 
-/* AVATAR LOGO */
 .avatar-logo-container{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
 .avatar-logo-svg{width:100%;height:100%;overflow:visible}
 .av-hexagon-border{fill:none;stroke-width:9;stroke-linecap:round;stroke-linejoin:round}
@@ -37,12 +35,10 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .av-arrow{fill:none;stroke:#000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
 .av-arrow-head{opacity:0}
 
-/* PAGES */
 .page-wrapper{position:fixed;top:0;left:0;width:100%;height:100%;z-index:10;opacity:0;pointer-events:none;transition:opacity .8s ease;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;scroll-behavior:smooth;background:transparent}
 .page-wrapper::-webkit-scrollbar{display:none}
 .page-wrapper.visible{opacity:1;pointer-events:all}
 
-/* LANDING */
 .landing-nav{position:sticky;top:0;height:56px;display:flex;justify-content:center;align-items:center;padding:0 20px;background:rgba(5,7,11,.95);border-bottom:1px solid rgba(255,255,255,.05);z-index:200}
 .nav-center{display:flex;align-items:center;width:100%;max-width:1100px;justify-content:space-between}
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
@@ -67,7 +63,7 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .hero-btn.secondary{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
 .hero-btn.secondary:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.9);transform:translateY(-2px)}
 
-.floating-stats{width:100%;max-width:950px;display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:auto;padding-top:40px;position:relative;z-index:20;flex-wrap:wrap}
+.floating-stats{width:100%;max-width:950px;display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:auto;padding-top:30px;position:relative;z-index:20;flex-wrap:wrap}
 .stat-item-float{flex:1;max-width:300px;text-align:center;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.04);padding:18px 20px;border-radius:14px}
 .stat-number-float{font-size:clamp(18px,2.2vw,26px);font-weight:800;color:#fff;line-height:1;margin-bottom:5px}
 .stat-number-float span{color:#00d2ff}
@@ -142,7 +138,6 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .footer-bottom{text-align:center;padding-top:24px;border-top:1px solid rgba(255,255,255,.05)}
 .footer-bottom p{font-size:11px;color:rgba(255,255,255,.3)}
 
-/* AUTH */
 #auth-page{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px}
 .auth-container{width:100%;max-width:320px;text-align:center;animation:slideUp .8s ease}
 @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
@@ -159,7 +154,6 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .auth-btn:disabled{background:rgba(0,210,255,0.2);color:rgba(255,255,255,0.4);box-shadow:none;cursor:not-allowed}
 .auth-footer{margin-top:16px;font-size:10px;color:rgba(255,255,255,.4)}
 
-/* MAIN APP */
 #main-app{display:flex;flex-direction:column}
 .app-header{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;background:rgba(5,7,11,.95);border-bottom:1px solid rgba(255,255,255,.05);position:sticky;top:0;z-index:200}
 .header-left{display:flex;align-items:center;gap:10px}
@@ -184,7 +178,6 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .welcome-card h2 span{color:#00d2ff}
 .welcome-card p{font-size:11px;color:rgba(255,255,255,.6);line-height:1.5}
 
-/* COMPACT STATS */
 .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
 .stat-box{text-align:center;transition:all .3s;padding:8px 6px !important}
 .stat-box:active{transform:scale(0.97)}
@@ -195,7 +188,6 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .section-title-app{font-size:14px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
 .section-title-app::before{content:'';width:3px;height:16px;background:#00d2ff;border-radius:3px}
 
-/* MISSIONS LOCKED PAGE */
 .missions-locked-page{position:relative;text-align:center;padding:40px 20px;min-height:calc(100vh - 200px);display:flex;flex-direction:column;align-items:center;justify-content:center}
 .missions-lock-wrapper{position:relative;margin-bottom:24px}
 .missions-lock-icon{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,rgba(240,165,0,.15),rgba(240,165,0,.05));border:2px solid rgba(240,165,0,.35);display:flex;align-items:center;justify-content:center;color:#f0a500;margin:0 auto;box-shadow:0 0 60px rgba(240,165,0,.2);animation:lockPulse 3s ease-in-out infinite}
@@ -212,7 +204,6 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .blurred-line.short{width:60%}
 .blurred-reward{width:40px;height:14px;background:rgba(240,165,0,.2);border-radius:4px}
 
-/* PROFILE */
 .profile-top{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px}
 .profile-left{display:flex;flex-direction:column;align-items:center;gap:8px;width:80px;flex-shrink:0}
 .profile-left .profile-name-sm{font-size:12px;font-weight:700;color:#fff;text-align:center}
@@ -236,7 +227,6 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .ref-text h4{font-size:12px;font-weight:700;color:#fff;margin-bottom:2px}
 .ref-text p{font-size:11px;color:rgba(255,255,255,.6);line-height:1.4}
 
-/* MODAL */
 .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:4000;opacity:0;pointer-events:none;transition:opacity .3s}
 .modal-overlay.visible{opacity:1;pointer-events:all}
 .modal-sheet{position:fixed;bottom:0;left:0;width:100%;max-height:85%;background:rgba(11,15,24,.95);border-top:1px solid rgba(0,210,255,.2);border-radius:20px 20px 0 0;padding:20px;z-index:5000;transform:translateY(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);overflow-y:auto}
@@ -253,7 +243,6 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .notif-content p{font-size:11px;color:rgba(255,255,255,.6);line-height:1.4}
 .notif-time{font-size:10px;color:rgba(255,255,255,.3);margin-top:4px;display:block}
 
-/* WALLET */
 .wallet-balance-card{background:linear-gradient(135deg,rgba(0,210,255,.12),rgba(0,153,204,.04));border:1px solid rgba(0,210,255,.25);border-radius:14px;padding:18px;margin-bottom:16px;text-align:center;position:relative;overflow:hidden}
 .wallet-balance-card::before{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(0,210,255,.2),transparent 70%);pointer-events:none}
 .wallet-balance-label{font-size:10px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
@@ -275,10 +264,11 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .method-card:hover{border-color:rgba(0,210,255,.2)}
 .method-card.selected{border-color:rgba(0,210,255,.4);background:rgba(0,210,255,.05)}
 .method-head{display:flex;align-items:center;gap:10px}
-.method-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
-.method-icon.binance{background:rgba(243,186,47,.12);color:#F0B90B}
-.method-icon.usdt{background:transparent}
-.method-icon svg{width:100%;height:100%}
+.method-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;background:rgba(255,255,255,.03)}
+.method-icon.binance{background:rgba(240,185,11,.08);padding:6px}
+.method-icon.binance img{width:100%;height:100%;object-fit:contain;display:block;filter:invert(78%) sepia(80%) saturate(600%) hue-rotate(5deg)}
+.method-icon.usdt{background:transparent;padding:0}
+.method-icon.usdt svg{width:100%;height:100%}
 .method-name{font-size:12px;font-weight:700;color:#fff}
 .method-desc{font-size:10px;color:rgba(255,255,255,.4)}
 .method-fee{margin-left:auto;font-size:10px;color:#f0a500;font-weight:600;background:rgba(240,165,0,.1);padding:2px 8px;border-radius:4px}
@@ -304,7 +294,6 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .tx-status.completed{background:rgba(40,200,64,.15);color:#28c840}
 .tx-status.pending{background:rgba(240,165,0,.15);color:#f0a500}
 
-/* TOOL CARDS */
 .tool-full-card{padding:14px;margin-bottom:14px;overflow:hidden;background:rgba(11,15,24,.9)}
 .tool-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .tool-icon{width:38px;height:38px;border-radius:8px;background:rgba(0,210,255,.06);display:flex;align-items:center;justify-content:center;color:#00d2ff;border:1px solid rgba(0,210,255,.1);flex-shrink:0}
@@ -321,7 +310,6 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .tool-details h4::before{content:'';width:2px;height:12px;background:#00d2ff;border-radius:2px}
 .tool-details p{font-size:11px;color:rgba(255,255,255,.55);margin-bottom:10px;line-height:1.6}
 
-/* PORTRAIT IMAGE PLACEHOLDER */
 .img-placeholder{width:100%; aspect-ratio: 3/4; background:linear-gradient(135deg,rgba(0,210,255,.06),rgba(0,0,0,.5)); border:1px solid rgba(0,210,255,.15); border-radius:12px; margin:10px 0 14px; display: flex; flex-direction:column; align-items: center; justify-content: center; gap:8px; color: rgba(0,210,255,.5); font-size: 11px; font-weight:600; letter-spacing:.5px; position:relative; overflow:hidden}
 .img-placeholder::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(0,210,255,.12),transparent 60%)}
 .img-placeholder::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.4) 100%)}
@@ -397,7 +385,6 @@ body{font-family:'Montserrat',Arial,sans-serif}
 .copy-btn{padding:8px 12px;background:#00d2ff;color:#000;border:none;border-radius:6px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .copy-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8}
 
-/* BOTTOM NAV */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:60px;background:rgba(5,7,11,.95);border-top:1px solid rgba(0,210,255,.1);display:flex;justify-content:space-around;align-items:center;z-index:300;padding-bottom:env(safe-area-inset-bottom)}
 .nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;opacity:.4;transition:all .3s;width:20%;position:relative}
 .nav-item.active{opacity:1}
@@ -419,7 +406,7 @@ body{font-family:'Montserrat',Arial,sans-serif}
 }
 
 @media (max-width:600px){
-  .hero{min-height:calc(100vh - 56px);padding:70px 18px 24px}
+  .hero{min-height:calc(100vh - 56px);padding:70px 18px 20px}
   .hero-top{padding-top:10px}
   .hero-badge{font-size:9px;padding:5px 10px;margin-bottom:16px}
   .hero h1{font-size:clamp(26px,8vw,32px);line-height:1.12;letter-spacing:-0.7px;margin-bottom:14px;max-width:350px}
@@ -427,9 +414,15 @@ body{font-family:'Montserrat',Arial,sans-serif}
   .hero-sub{font-size:12px;line-height:1.9;max-width:340px;margin-bottom:24px}
   .hero-actions{flex-direction:row;gap:10px;align-items:center;justify-content:center;width:auto;margin-top:14px}
   .hero-btn{width:auto;min-width:auto;flex:none;padding:10px 20px;font-size:12px}
-  .floating-stats{gap:8px;padding:0 12px;padding-top:24px;flex-wrap:nowrap}
-  .stat-item-float{padding:7px 8px;min-width:0;flex:1}
-  .stat-number-float{font-size:12px}
+  /* رفع الإحصائيات للأعلى */
+  .floating-stats{
+    gap:8px;
+    padding:0 12px;
+    margin-top:20px !important;
+    flex-wrap:nowrap;
+  }
+  .stat-item-float{padding:10px 8px;min-width:0;flex:1}
+  .stat-number-float{font-size:13px}
   .stat-label-float{font-size:7px;line-height:1.2}
   .hero-glow{width:360px;height:360px;top:35%}
   .pricing-grid,.footer-grid{grid-template-columns:1fr;max-width:360px;margin:0 auto}
@@ -478,7 +471,6 @@ body{font-family:'Montserrat',Arial,sans-serif}
     <symbol id="icon-heart" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
     <symbol id="icon-gift" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></symbol>
     <symbol id="icon-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
-    <!-- WALLET ICON -->
     <symbol id="icon-wallet" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="icon-arrow-up" viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></symbol>
     <symbol id="icon-arrow-down" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></symbol>
@@ -486,23 +478,17 @@ body{font-family:'Montserrat',Arial,sans-serif}
     <symbol id="icon-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
     <symbol id="icon-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></symbol>
     
-    <!-- LEVEL ICONS -->
     <symbol id="icon-sprout" viewBox="0 0 24 24"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.8c2.5 2.4 2.8 6.2.5 9.4-2.2-1.8-3.4-5.6-.5-9.4z"/><path d="M14.1 6c-.8 4.7-3.6 6.5-6.1 6.5-1.2 0-2.3-.4-3-1.2-1.2-1.4-1-3.5.5-4.8C7 5 10.1 4.2 14.1 6z"/></symbol>
     <symbol id="icon-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
     <symbol id="icon-gem" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></symbol>
     <symbol id="icon-crown" viewBox="0 0 24 24"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7z"/></symbol>
 
-    <!-- BINANCE OFFICIAL LOGO (from simple-icons) -->
-    <symbol id="icon-binance" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M12 2L8.529 5.471l2.132 2.132L12 6.264l1.339 1.339 2.132-2.132L12 2zM5.471 8.529L2 12l3.471 3.471 2.132-2.132L6.264 12l1.339-1.339-2.132-2.132zM12 9.393L9.868 11.525 12 13.657l2.132-2.132L12 9.393zm6.529-.864l-2.132 2.132L17.736 12l-1.339 1.339 2.132 2.132L22 12l-3.471-3.471zM12 15.736l-3.471 3.471L12 22l3.471-3.471L12 15.736z"/>
-    </symbol>
     <!-- USDT OFFICIAL LOGO -->
     <symbol id="icon-usdt" viewBox="0 0 256 256">
       <circle cx="128" cy="128" r="128" fill="#26A17B"/>
       <path fill="#fff" d="M142.7 139.2v-.1c-.8.1-4.9.3-14.1.3-7.3 0-12.5-.2-14.3-.3v.1c-36.4-1.6-63.6-7.9-63.6-15.4s27.2-13.8 63.6-15.4v24.5c1.8.1 7.1.5 14.4.5 9 0 13.2-.4 14-.5v-24.5c36.3 1.6 63.4 7.9 63.4 15.4s-27.1 13.8-63.4 15.4zm0-33.3V96h48.6V72H64.8v24h48.5v9.9c-39.4 1.8-69 9.6-69 21.4s29.6 19.6 69 21.4v31.8h29.4v-31.8c39.3-1.8 68.8-9.6 68.8-21.4s-29.5-19.6-68.8-21.4z"/>
     </symbol>
 
-    <!-- SOCIAL ICONS -->
     <symbol id="icon-facebook" viewBox="0 0 24 24"><path d="M9 8H6v4h3v8h4v-8h3.5l.5-4h-4V6.5c0-1 .3-1.5 1.5-1.5H17V2h-3.5C10.5 2 9 3.5 9 6v2z" fill="currentColor" stroke="none"/></symbol>
     <symbol id="icon-x" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor" stroke="none"/></symbol>
     <symbol id="icon-instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></symbol>
@@ -1039,38 +1025,10 @@ body{font-family:'Montserrat',Arial,sans-serif}
         <h2 class="missions-locked-title">Coming Soon</h2>
         <p class="missions-locked-sub">Daily missions are being prepared. Check back soon to start earning bonus points!</p>
         <div class="missions-blurred-preview">
-          <div class="blurred-mission-item">
-            <div class="blurred-check"></div>
-            <div class="blurred-lines">
-              <div class="blurred-line"></div>
-              <div class="blurred-line short"></div>
-            </div>
-            <div class="blurred-reward"></div>
-          </div>
-          <div class="blurred-mission-item">
-            <div class="blurred-check"></div>
-            <div class="blurred-lines">
-              <div class="blurred-line"></div>
-              <div class="blurred-line short"></div>
-            </div>
-            <div class="blurred-reward"></div>
-          </div>
-          <div class="blurred-mission-item">
-            <div class="blurred-check"></div>
-            <div class="blurred-lines">
-              <div class="blurred-line"></div>
-              <div class="blurred-line short"></div>
-            </div>
-            <div class="blurred-reward"></div>
-          </div>
-          <div class="blurred-mission-item">
-            <div class="blurred-check"></div>
-            <div class="blurred-lines">
-              <div class="blurred-line"></div>
-              <div class="blurred-line short"></div>
-            </div>
-            <div class="blurred-reward"></div>
-          </div>
+          <div class="blurred-mission-item"><div class="blurred-check"></div><div class="blurred-lines"><div class="blurred-line"></div><div class="blurred-line short"></div></div><div class="blurred-reward"></div></div>
+          <div class="blurred-mission-item"><div class="blurred-check"></div><div class="blurred-lines"><div class="blurred-line"></div><div class="blurred-line short"></div></div><div class="blurred-reward"></div></div>
+          <div class="blurred-mission-item"><div class="blurred-check"></div><div class="blurred-lines"><div class="blurred-line"></div><div class="blurred-line short"></div></div><div class="blurred-reward"></div></div>
+          <div class="blurred-mission-item"><div class="blurred-check"></div><div class="blurred-lines"><div class="blurred-line"></div><div class="blurred-line short"></div></div><div class="blurred-reward"></div></div>
         </div>
       </div>
     </div>
@@ -1258,7 +1216,9 @@ body{font-family:'Montserrat',Arial,sans-serif}
   <div class="wallet-panel active" id="wallet-deposit">
     <div class="method-card selected" onclick="selectMethod(this)">
       <div class="method-head">
-        <div class="method-icon binance"><svg><use href="#icon-binance"/></svg></div>
+        <div class="method-icon binance">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/binance.svg" alt="Binance">
+        </div>
         <div>
           <div class="method-name">Binance Pay ID</div>
           <div class="method-desc">Instant deposit via Binance Pay</div>
@@ -1287,7 +1247,9 @@ body{font-family:'Montserrat',Arial,sans-serif}
   <div class="wallet-panel" id="wallet-withdraw">
     <div class="method-card selected" onclick="selectMethod(this)">
       <div class="method-head">
-        <div class="method-icon binance"><svg><use href="#icon-binance"/></svg></div>
+        <div class="method-icon binance">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/binance.svg" alt="Binance">
+        </div>
         <div>
           <div class="method-name">Binance Pay ID</div>
           <div class="method-desc">Fast withdrawal to Binance</div>
@@ -1403,18 +1365,11 @@ let userData={id:'',username:'',firstName:'',points:10,cashEarnings:0,freeDays:0
 const tg=window.Telegram.WebApp;
 if(tg)tg.expand();
 
-const badgesState = {
-  signals: 2,
-  ready: 1,
-  missions: 4,
-  profile: 5
-};
+const badgesState = { signals: 2, ready: 1, missions: 4, profile: 5 };
 
 function updateBadge(sectionName){
   const badge = document.getElementById('badge-' + sectionName);
-  if(badge){
-    badge.classList.add('hidden');
-  }
+  if(badge) badge.classList.add('hidden');
 }
 
 var pathRef=document.getElementById('arrowPathRef'),pathLine=document.querySelector('.arrow'),pathBorder=document.querySelector('.arrow-border'),arrowHeadGroup=document.getElementById('arrowHeadGroup');
